@@ -32,7 +32,7 @@ Minh họa cơ chế không được giả thành bằng chứng sự kiện.
 
 ## Video tham chiếu
 Video có sẵn làm nguồn kịch bản được, không phải nguồn sự thật. Phiên âm lời kèm timestamp vào research.md.
-Mỗi claim lấy từ video: source = file video + timestamp, status `pending`, ghi chú `per-reference/unverified`.
+Mỗi claim lấy từ video ghi đúng là lời video: text bắt đầu “Video tham chiếu nói rằng …”, type `attributed`, source = file video + timestamp, status `verified` (nguồn hỗ trợ đúng lời quy cho video), ghi chú `per-reference/unverified` rằng sự thật bên dưới chưa đối chiếu. Status `pending` chặn `check --final`, nên không dùng cho claim đã dùng trong video.
 Không dùng lại footage, nhạc hay đồ họa của video khi chưa có quyền; dựng lại bằng tài sản riêng.
 Số liệu lấy từ video chỉ hiển thị kèm “theo video tham chiếu” cho tới khi đối chiếu được nguồn gốc.
 

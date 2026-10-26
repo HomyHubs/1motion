@@ -71,8 +71,8 @@ Dùng workflow chung bên dưới trên Hermes hoặc agent khác. Đọc
 - Không khóa kịch bản với claim cốt lõi chưa kiểm chứng. Nếu không truy cập
   nguồn được thì xin tài liệu, không giả đã nghiên cứu.
 - Viết beat map: một ý/beat; một beat có thể có nhiều shot.
-- Có video tham chiếu: dùng làm nguồn kịch bản được. Chép lời vào research.md, gắn
-  claim `per-reference/unverified` kèm timestamp; không coi là sự thật đã kiểm.
+- Có video tham chiếu: dùng làm nguồn kịch bản được. Chép lời vào research.md; claim viết dưới dạng lời quy cho video
+  (“Video tham chiếu nói rằng …”, `attributed`, kèm timestamp), sự thật bên dưới chưa được kiểm.
 - Xuất research.md, script.md và storyboard.md; tách narration sạch khỏi URL,
   ghi chú hình, số liệu hiển thị và nguồn.
 

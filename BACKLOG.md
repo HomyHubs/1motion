@@ -14,12 +14,12 @@ Trạng thái: `[ ]` chưa làm · `[x]` đã vá · `[?]` cần anh chốt hư�
 
 | Mã | Ưu tiên | Trạng thái | Loại | Vấn đề (1 dòng) | Hướng vá |
 |----|---------|-----------|------|-----------------|----------|
-| H1 | Cao | [ ] | bug | `scripts/check_schema.py` đọc JSON không `encoding='utf-8'`: trên Windows (cp1252) dễ `UnicodeDecodeError` hoặc đọc sai `project.json` tiếng Việt; lệch chuẩn với `project_tools.py` (luôn utf-8) | thêm `encoding='utf-8'` cho mọi `read_text()` |
-| H3 | TB | [ ] | test | `test_path_traversal` tạo symlink không guard: Windows thiếu quyền sẽ **error** (không skip); 2 test khác cần ffmpeg. "8 PASS" thực chất là Linux + ffmpeg | bọc tạo symlink trong try/except rồi `skipTest` kèm lý do; ghi rõ điều kiện trong `TEST_REPORT.md` |
-| H4 | TB | [ ] doc / [?] code | doc + design | Runtime mô tả wrapper `tts-vi.sh`/`synth.py`; `tts_batch.py` lại `from vieneu import Vieneu` trực tiếp, bỏ qua wrapper | vá doc: ghi rõ 2 đường và điều kiện tương đương; hợp nhất code = quyết định để sau |
-| H5 | Thấp | [ ] | robustness | `check_schema.py` `kinds[s['type']]`: KeyError không bắt nếu schema thêm type lạ (boolean/null/union) | báo lỗi sạch "type không hỗ trợ" thay vì crash |
-| H6 | Thấp | [ ] | doc | Version skill `1.0.0` (frontmatter) vs version project `1.0` (schema/validator/pilot) gây nhầm | README làm rõ 2 namespace khác nhau |
-| H2 | Cao | [?] | design | `init()` copy nguyên `examples/pilot.project.json`: project mới mang sẵn dữ liệu minh họa, mâu thuẫn cam kết "không bịa số liệu". Có backstop: `assemble --final` chặn vì asset `money` đang `waiting` | cần anh chốt (xem mục dưới) |
+| H1 | Cao | [x] | bug | `scripts/check_schema.py` đọc JSON không `encoding='utf-8'`: trên Windows (cp1252) dễ `UnicodeDecodeError` hoặc đọc sai `project.json` tiếng Việt; lệch chuẩn với `project_tools.py` (luôn utf-8) | thêm `encoding='utf-8'` cho mọi `read_text()` |
+| H3 | TB | [x] | test | `test_path_traversal` tạo symlink không guard: Windows thiếu quyền sẽ **error** (không skip); 2 test khác cần ffmpeg. "8 PASS" thực chất là Linux + ffmpeg | bọc tạo symlink trong try/except rồi `skipTest` kèm lý do; ghi rõ điều kiện trong `TEST_REPORT.md` |
+| H4 | TB | [x] doc / [x] code: giữ import trực tiếp, `project_tools.py voice` là đường duy nhất gọi `tts_batch.py` | doc + design | Runtime mô tả wrapper `tts-vi.sh`/`synth.py`; `tts_batch.py` lại `from vieneu import Vieneu` trực tiếp, bỏ qua wrapper | vá doc: ghi rõ 2 đường và điều kiện tương đương; hợp nhất code = quyết định để sau |
+| H5 | Thấp | [x] | robustness | `check_schema.py` `kinds[s['type']]`: KeyError không bắt nếu schema thêm type lạ (boolean/null/union) | báo lỗi sạch "type không hỗ trợ" thay vì crash |
+| H6 | Thấp | [x] | doc | Version skill `1.0.0` (frontmatter) vs version project `1.0` (schema/validator/pilot) gây nhầm | README làm rõ 2 namespace khác nhau |
+| H2 | Cao | [x] (a) `templates/project.template.json`, `init()` copy khung trắng | design | `init()` copy nguyên `examples/pilot.project.json`: project mới mang sẵn dữ liệu minh họa, mâu thuẫn cam kết "không bịa số liệu". Có backstop: `assemble --final` chặn vì asset `money` đang `waiting` | cần anh chốt (xem mục dưới) |
 
 ## Đợt thực thi này (an toàn, có thể đảo ngược)
 
