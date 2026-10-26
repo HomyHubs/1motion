@@ -231,22 +231,27 @@ def vieneu_python():
     if override: return Path(override)
     return Path.home()/'.venvs/vieneu'/('Scripts/python.exe' if os.name=='nt' else 'bin/python')
 
+def voice(root,extra):
+    interpreter=vieneu_python()
+    if not interpreter.is_file(): raise ValueError('VieNeu interpreter not found: '+str(interpreter)+' (set VIENEU_PYTHON)')
+    return subprocess.run([str(interpreter),str(ROOT/'scripts/tts_batch.py'),str(root),*extra]).returncode
+
 def doctor():
     tools={k:shutil.which(k) for k in ['ffmpeg','ffprobe','node','chromium','chromium-browser']}
     tools['python3']=sys.executable
     tools['hyperframes']=os.environ.get('HYPERFRAMES_CMD') or shutil.which('hyperframes')
     vieneu=vieneu_python()
-    return {'tools':tools,'python':sys.version.split()[0],'os':sys.platform,'cpu_count':os.cpu_count(),
-            'disk_free_gb':round(shutil.disk_usage(Path.cwd()).free/2**30,1),
+    return {'tools':tools,'python':sys.version.split()[0],'cpu_count':os.cpu_count(),
             'vieneu_python':str(vieneu),'vieneu_python_exists':vieneu.is_file(),
             'vieneu_voice':os.environ.get('VIENEU_VOICE'),
             'notice':'Paths only. No installation, network, model import, media endpoint or benchmark performed.'}
 
 def main():
     parser=argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('command',choices=['doctor','init','check','measure','assemble'])
+    parser.add_argument('command',choices=['doctor','init','check','measure','assemble','voice'])
     parser.add_argument('project',nargs='?');parser.add_argument('--assets',action='store_true');parser.add_argument('--final',action='store_true')
-    args=parser.parse_args()
+    args,extra=parser.parse_known_args()
+    if extra and args.command!='voice': parser.error('unrecognized arguments: '+' '.join(extra))
     if args.command=='doctor': result=doctor()
     else:
         if not args.project: parser.error('project required')
@@ -254,6 +259,7 @@ def main():
         if args.command=='init': init(root);result={'created':str(root)}
         elif args.command=='check':
             errors=validate(load(root),root,args.assets,args.final);print(json.dumps({'ok':not errors,'errors':errors},ensure_ascii=False,indent=2));return int(bool(errors))
+        elif args.command=='voice': return voice(root,extra)
         elif args.command=='measure': result={'total_duration_s':measure(root)['total_duration_s']}
         else: result=assemble(root)
     print(json.dumps(result,ensure_ascii=False,indent=2));return 0

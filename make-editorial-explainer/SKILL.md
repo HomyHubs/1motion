@@ -55,7 +55,7 @@ Dùng workflow chung bên dưới trên Hermes hoặc agent khác. Đọc
    chưa có thì nêu rõ, không tự dùng npx để tải gói. doctor không cài gì.
 4. Khởi tạo bằng `project_tools.py init <project>`. Không ghi đè dự án có sẵn.
    init chép `templates/project.template.json` (khung trắng: `check` báo lỗi cho tới
-   khi điền title và beat) và ghi kết quả doctor vào `capabilities.json` mục `runtime`.
+   khi điền title và beat) và ghi kết quả doctor vào `capabilities.json` mục `runtime` (ảnh chụp lúc init: chạy lại doctor ở mỗi gate).
    Điền `capabilities.json`: tool thực có, phương thức gọi, quota biết/chưa biết,
    local/remote, quyền, shared-path, trạng thái tested/unverified/blocked.
 5. Đọc `templates/project.schema.json` và `examples/pilot.project.json` (ví dụ,
@@ -83,8 +83,8 @@ trong approvals; quyền đó không mở rộng sang đăng nhập, trả phí 
 ## Bước 2 — Voice là đồng hồ chính
 Đọc `references/runtime-hermes.md` và `references/production.md`.
 - Tạo WAV theo beat bằng VieNeu; ưu tiên batch một lần khởi tạo model.
-- Chạy `"$VIENEU_PYTHON" <skill>/scripts/tts_batch.py` (PowerShell: `& $env:VIENEU_PYTHON ...`;
-  doctor in `vieneu_python`) bằng interpreter VieNeu đã được kiểm tra. Script
+- Chạy `<py> <skill>/scripts/project_tools.py voice <project> --cache-confirmed [--only ID ...]`:
+  một đường duy nhất, tự chọn interpreter VieNeu như doctor, không gọi `tts_batch.py` trực tiếp. Script
   không có fallback và không tải model thay người dùng; thư viện có thể tải
   nếu cache chưa đủ, vì vậy phải xác minh cache/offline trước khi chạy.
 - Đo từng WAV bằng `project_tools.py measure <project>`. Tính lại từ file thật
@@ -158,8 +158,10 @@ Không dùng ảnh tĩnh làm bằng chứng đã đạt animation. Cho anh duy�
 ```bash
 <py> <skill>/scripts/project_tools.py doctor
 <py> <skill>/scripts/project_tools.py init /path/to/project
+# check báo lỗi ngay sau init (khung trắng) cho tới khi điền title và beat
 <py> <skill>/scripts/project_tools.py check /path/to/project
-# Sau khi tạo audio/beat_01.wav ...
+<py> <skill>/scripts/project_tools.py voice /path/to/project --cache-confirmed
+# Sau khi có audio/beat_01.wav ...
 <py> <skill>/scripts/project_tools.py measure /path/to/project
 # Sau khi render các clip, điền clip_path vào beats:
 <py> <skill>/scripts/project_tools.py assemble /path/to/project

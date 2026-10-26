@@ -24,13 +24,13 @@ Mẫu ở `examples/runtime.env.example`. Đường dẫn máy cụ thể không
 Dùng terminal/file/web tools mà Hermes phiên này thực sự cung cấp; không bịa tên
 MCP/tool. Skill không tự bật browser, media hay quyền đọc file ngoài workspace.
 Chạy doctor: nó là probe duy nhất, kết quả JSON nằm trong `capabilities.json` mục `runtime` và là sự thật của dự án.
-Doctor báo đường dẫn thật, version Python, ffmpeg, HyperFrames, cpu_count và disk free.
+Doctor báo đường dẫn thật, version Python, ffmpeg, HyperFrames và cpu_count.
 Chỉ chạy --help/version của công cụ đã có, không npx tự download.
 Ghi tất cả vào capabilities.json, trạng thái unverified cho thứ chưa test.
 
 ## Voice
 Hai đường tạo voice, chọn một cho cả video:
-1. `scripts/tts_batch.py` import trực tiếp `from vieneu import Vieneu` bằng `$VIENEU_PYTHON`. Đường mặc định, không cần shell.
+1. `project_tools.py voice <project> --cache-confirmed`: chạy `scripts/tts_batch.py` (import trực tiếp `from vieneu import Vieneu`) bằng interpreter mà doctor chọn (`VIENEU_PYTHON`). Đường mặc định, không cần shell riêng.
 2. Wrapper `tts-vi.sh` / `synth.py` của anh. Tùy chọn, chỉ khi tồn tại; doctor không kiểm. Cùng model và giọng nhưng không bảo đảm cùng tham số với đường 1.
 
 Review wrapper hoặc script trước, bảo đảm không fallback ngoài. Kiểm tra cache đầy đủ và
@@ -39,6 +39,9 @@ Các biến offline là guard cho thư viện HF, không phải network sandbox 
 Không có quyền outbound thì dùng sandbox/network policy của môi trường.
 Batch helper dùng Vieneu(), infer(text, voice=...), save(audio,path) như script
 người dùng đã gửi. API có thể đổi; fail nếu không tương thích, không tự thay engine.
+
+Lần chạy đầu: nếu model chưa có trong cache, tải một lần khi anh đồng ý (model công khai, không cần tài khoản),
+rồi mới bật chế độ offline và dùng `--cache-confirmed`. Không tải ngầm.
 
 Lỗi ONNX external .data qua symlink từng gặp theo báo cáo: không tự thay cả HF
 snapshot. Kiểm tra lỗi/path/version; nếu cần, đề xuất copy model sang cache riêng,

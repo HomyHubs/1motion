@@ -31,6 +31,9 @@ class Helpers(unittest.TestCase):
         with mock.patch.dict(os.environ,{'VIENEU_PYTHON':str(fake),'VIENEU_VOICE':'v1','HYPERFRAMES_CMD':'hf-cmd'}):
             report=t.doctor()
         self.assertEqual((report['vieneu_python'],report['vieneu_python_exists'],report['vieneu_voice'],report['tools']['hyperframes']),(str(fake),True,'v1','hf-cmd'))
+    def test_voice_requires_vieneu_interpreter(self):
+        with mock.patch.dict(os.environ,{'VIENEU_PYTHON':str(self.root/'missing-python')}):
+            with self.assertRaisesRegex(ValueError,'VieNeu interpreter not found'): t.voice(self.root,[])
     def test_refuse_existing(self):
         with self.assertRaises(ValueError): t.init(self.root)
     def test_duplicate_and_unknown(self):

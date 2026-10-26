@@ -30,6 +30,12 @@ luận gian lận, vỡ nợ hay vi phạm. Ghi cấp tòa/ngày/tình trạng h
 Map phải có nguồn địa giới/nhãn phù hợp, attribution, không AI tự bịa địa danh.
 Minh họa cơ chế không được giả thành bằng chứng sự kiện.
 
+## Video tham chiếu
+Video có sẵn làm nguồn kịch bản được, không phải nguồn sự thật. Phiên âm lời kèm timestamp vào research.md.
+Mỗi claim lấy từ video: source = file video + timestamp, status `pending`, ghi chú `per-reference/unverified`.
+Không dùng lại footage, nhạc hay đồ họa của video khi chưa có quyền; dựng lại bằng tài sản riêng.
+Số liệu lấy từ video chỉ hiển thị kèm “theo video tham chiếu” cho tới khi đối chiếu được nguồn gốc.
+
 ## Đầu ra
 research.md (ledger + giới hạn), script.md (hook/beat map/narration sạch),
 storyboard.md (ý → hình → motion → câu kích hoạt → nguồn).
