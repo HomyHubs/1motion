@@ -59,7 +59,7 @@ def probe(path):
 def load(root):
     return json.loads((Path(root) / 'project.json').read_text(encoding='utf-8'))
 
-def validate(doc, root, assets=False, final=False):
+def validate(doc, root, assets=False, final=False, pilot=False):
     errors = []
     if not isinstance(doc, dict):
         return ['Project must be an object']
@@ -130,7 +130,7 @@ def validate(doc, root, assets=False, final=False):
             if not isinstance(refs,list): errors.append('Missing '+key+': '+bid); continue
             for ref in refs:
                 if ref not in sets[pool]: errors.append('Unknown '+pool+' ref: '+str(ref))
-                elif final and pool=='claims' and sets[pool][ref].get('status')=='pending': errors.append('Unverified used claim: '+ref)
+                elif final and not pilot and pool=='claims' and sets[pool][ref].get('status')=='pending': errors.append('Unverified used claim: '+ref)
         layerids=set()
         if not isinstance(b.get('layers'),list): errors.append('Missing layers: '+bid)
         else:
@@ -172,8 +172,8 @@ def measure(root):
     save(root/'project.json',doc)
     return doc
 
-def assemble(root):
-    root=Path(root).resolve();doc=load(root);require(doc,root,assets=True,final=True)
+def assemble(root,pilot=False):
+    root=Path(root).resolve();doc=load(root);require(doc,root,assets=True,final=True,pilot=pilot)
     fmt=doc['format'];fps=fmt['fps'];outdir=root/'final';outdir.mkdir(exist_ok=True)
     output=outdir/'film.mp4'
     if output.exists(): raise ValueError('Refuse overwrite final/film.mp4; archive it explicitly first')
@@ -211,7 +211,8 @@ def assemble(root):
         if abs(dur-expected)>len(inputs)/fps+0.08: raise ValueError('Unexpected mux duration drift')
         # Atomic non-overwrite publish, even if another process raced this helper.
         os.link(rendered,output)
-    manifest={'scope':'basic local VO-only assembly; not visual/evidence/listening approval',
+    unverified=sorted({c for b in doc['beats'] for c in b['claim_ids'] if next(x for x in doc['claims'] if x['id']==c).get('status')=='pending'}) if pilot else []
+    manifest={'scope':'basic local VO-only assembly; not visual/evidence/listening approval','pilot':bool(pilot),'unverified_claims':unverified,
               'measured_duration_s':dur,'expected_duration_s':expected,'file':str(output.relative_to(root)),
               'sha256':sha(output),'inputs':[{'id':b['id'],'clip_sha256':sha(c),'audio_sha256':sha(w),'slot_s':d} for b,c,w,d in inputs]}
     save(outdir/'assembly_manifest.json',manifest)
@@ -250,7 +251,9 @@ def main():
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument('command',choices=['doctor','init','check','measure','assemble','voice'])
     parser.add_argument('project',nargs='?');parser.add_argument('--assets',action='store_true');parser.add_argument('--final',action='store_true')
+    parser.add_argument('--pilot',action='store_true',help='check/assemble: let claims still pending through; the manifest lists them; not for publishing')
     args,extra=parser.parse_known_args()
+    if args.pilot and args.command not in ('check','assemble'): parser.error('--pilot applies to check and assemble only')
     if extra and args.command!='voice': parser.error('unrecognized arguments: '+' '.join(extra))
     if args.command=='doctor': result=doctor()
     else:
@@ -258,10 +261,10 @@ def main():
         root=Path(args.project).expanduser().resolve()
         if args.command=='init': init(root);result={'created':str(root)}
         elif args.command=='check':
-            errors=validate(load(root),root,args.assets,args.final);print(json.dumps({'ok':not errors,'errors':errors},ensure_ascii=False,indent=2));return int(bool(errors))
+            errors=validate(load(root),root,args.assets,args.final,args.pilot);print(json.dumps({'ok':not errors,'errors':errors},ensure_ascii=False,indent=2));return int(bool(errors))
         elif args.command=='voice': return voice(root,extra)
         elif args.command=='measure': result={'total_duration_s':measure(root)['total_duration_s']}
-        else: result=assemble(root)
+        else: result=assemble(root,args.pilot)
     print(json.dumps(result,ensure_ascii=False,indent=2));return 0
 
 if __name__=='__main__':

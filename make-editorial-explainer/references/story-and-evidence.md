@@ -32,7 +32,7 @@ Minh họa cơ chế không được giả thành bằng chứng sự kiện.
 
 ## Video tham chiếu
 Video có sẵn làm nguồn kịch bản được, không phải nguồn sự thật. Phiên âm lời kèm timestamp vào research.md.
-Mỗi claim lấy từ video ghi đúng là lời video: text bắt đầu “Video tham chiếu nói rằng …”, type `attributed`, source = file video + timestamp, status `verified` (nguồn hỗ trợ đúng lời quy cho video), ghi chú `per-reference/unverified` rằng sự thật bên dưới chưa đối chiếu. Status `pending` chặn `check --final`, nên không dùng cho claim đã dùng trong video.
+Mỗi claim lấy từ video: type `attributed`, source = file video + timestamp, status `pending` (sự thật bên dưới chưa đối chiếu; `verified` chỉ khi đã đối chiếu nguồn độc lập). Bản dựng lại để so sánh là `pilot`: `check --assets --final --pilot` và `assemble --pilot` cho claim `pending` đi qua, manifest ghi `unverified_claims`; `--final` không `--pilot` vẫn chặn. Bản đó không công bố. Giọng đọc nói chính sự thật bên dưới, nên phải có một dòng mở đầu trên màn hình: bản dựng lại để so sánh, số liệu theo video tham chiếu, chưa kiểm chứng.
 Không dùng lại footage, nhạc hay đồ họa của video khi chưa có quyền; dựng lại bằng tài sản riêng.
 Số liệu lấy từ video chỉ hiển thị kèm “theo video tham chiếu” cho tới khi đối chiếu được nguồn gốc.
 

@@ -51,6 +51,12 @@ class Helpers(unittest.TestCase):
     def test_missing_assets_and_final_gates(self):
         errs=t.validate(self.doc,self.root,True,True)
         self.assertTrue(any('Approval' in e for e in errs));self.assertTrue(any('Missing asset' in e for e in errs))
+    def test_pilot_lets_pending_claims_through(self):
+        self.doc['assets']=[];self.doc['approvals']={'story':'approved','pilot':'approved'}
+        for b in self.doc['beats']: b['asset_ids']=[]
+        for c in self.doc['claims']: c['status']='pending'
+        self.assertTrue(any('Unverified used claim' in e for e in t.validate(self.doc,self.root,False,True)))
+        self.assertFalse(any('Unverified used claim' in e for e in t.validate(self.doc,self.root,False,True,True)))
     def test_invalid_motion(self):
         self.doc['beats'][0]['events'][0]['target']='fake'
         self.assertTrue(any('Unknown event' in e for e in t.validate(self.doc,self.root)))
@@ -70,13 +76,18 @@ class Helpers(unittest.TestCase):
         # A stale saved duration must be replaced by measured audio.
         measured['beats'][0]['slot_duration_s']=99;t.save(self.root/'project.json',measured)
         self.assertAlmostEqual(t.measure(self.root)['beats'][0]['slot_duration_s'],.6,places=4)
-        manifest=t.assemble(self.root)
+        d=t.load(self.root)
+        for c in d['claims']: c['status']='pending'
+        t.save(self.root/'project.json',d)
+        with self.assertRaisesRegex(ValueError,'Unverified'):t.assemble(self.root)
+        manifest=t.assemble(self.root,pilot=True)
+        self.assertTrue(manifest['pilot']);self.assertTrue(manifest['unverified_claims'])
         self.assertLess(abs(manifest['measured_duration_s']-1.2),.15)
         self.assertTrue((self.root/'final'/'film.mp4').is_file())
-        with self.assertRaises(ValueError):t.assemble(self.root)
+        with self.assertRaises(ValueError):t.assemble(self.root,pilot=True)
         (self.root/'final'/'film.mp4').unlink()
         d=t.load(self.root);d['beats'][0]['narration']+=' Thay lời.';t.save(self.root/'project.json',d)
-        with self.assertRaisesRegex(ValueError,'Stale'):t.assemble(self.root)
+        with self.assertRaisesRegex(ValueError,'Stale'):t.assemble(self.root,pilot=True)
         with self.assertRaisesRegex(ValueError,'Narration changed'):t.measure(self.root)
     @unittest.skipUnless(shutil.which('ffmpeg') and shutil.which('ffprobe'),'FFmpeg required')
     def test_short_clip_rejected(self):

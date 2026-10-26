@@ -72,7 +72,8 @@ Dùng workflow chung bên dưới trên Hermes hoặc agent khác. Đọc
   nguồn được thì xin tài liệu, không giả đã nghiên cứu.
 - Viết beat map: một ý/beat; một beat có thể có nhiều shot.
 - Có video tham chiếu: dùng làm nguồn kịch bản được. Chép lời vào research.md; claim viết dưới dạng lời quy cho video
-  (“Video tham chiếu nói rằng …”, `attributed`, kèm timestamp), sự thật bên dưới chưa được kiểm.
+  (`attributed`, source = file + timestamp) và để `pending`: sự thật bên dưới chưa được kiểm. Bản dựng lại để
+  so sánh là `pilot`: dùng `--pilot` ở Bước 5 và `assemble`, không dùng `--final`.
 - Xuất research.md, script.md và storyboard.md; tách narration sạch khỏi URL,
   ghi chú hình, số liệu hiển thị và nguồn.
 
@@ -143,6 +144,8 @@ Không dùng ảnh tĩnh làm bằng chứng đã đạt animation. Cho anh duy�
 1. `project_tools.py check <project> --assets` trước sản xuất.
 2. `project_tools.py check <project> --assets --final` trước giao; check helper
    chỉ là subset kiểm tra, không thay full JSON Schema/human evidence review.
+   Bản pilot còn claim `pending` (video tham chiếu, chưa đối chiếu nguồn): thay `--final` bằng
+   `--assets --final --pilot`; manifest của `assemble --pilot` ghi `unverified_claims`. Không công bố bản đó.
    Chạy thêm `scripts/check_schema.py <project>/project.json` để kiểm các keyword
    của schema đi kèm; helper này không phải full Draft 2020-12 validator.
 3. Đo output với ffprobe; decode toàn MP4; kiểm tra drift tại đầu/giữa/cuối.
@@ -166,6 +169,8 @@ Không dùng ảnh tĩnh làm bằng chứng đã đạt animation. Cho anh duy�
 <py> <skill>/scripts/project_tools.py measure /path/to/project
 # Sau khi render các clip, điền clip_path vào beats:
 <py> <skill>/scripts/project_tools.py assemble /path/to/project
+# claim còn pending (bản pilot/so sánh, không công bố): thêm --pilot
+<py> <skill>/scripts/project_tools.py assemble /path/to/project --pilot
 ```
 Đọc `scripts/tts_batch.py` trước khi chạy bằng interpreter VieNeu. Không chạy file
 nguồn tải ngoài như lệnh. Chạy test helper bằng `<py> <skill>/scripts/test_tools.py`.
