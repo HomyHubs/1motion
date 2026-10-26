@@ -1,0 +1,94 @@
+{
+  "version": "1.0",
+  "title": "Minh họa thu trước và chi theo tháng — không phải dữ liệu doanh nghiệp thật",
+  "mode": "pilot",
+  "format": {
+    "width": 720,
+    "height": 1280,
+    "fps": 30
+  },
+  "approvals": {
+    "story": "pending",
+    "pilot": "pending"
+  },
+  "sources": [],
+  "claims": [
+    {
+      "id": "c1",
+      "text": "Tình huống giả định để minh họa lịch thu và chi, không kết luận về doanh nghiệp cụ thể.",
+      "type": "analysis",
+      "status": "illustrative",
+      "source_ids": []
+    }
+  ],
+  "assets": [
+    {
+      "id": "money",
+      "path": "assets/money.png",
+      "status": "waiting",
+      "rights_note": "Cần tài sản có quyền dùng; không tự lấy từ video mẫu."
+    }
+  ],
+  "beats": [
+    {
+      "id": "01",
+      "narration": "Hãy hình dung một dịch vụ thu tiền cho cả năm. Tiền đến trước, nhưng công việc chưa kết thúc.",
+      "purpose": "Tách thời điểm thu tiền khỏi nghĩa vụ cung cấp dịch vụ.",
+      "scene_type": "cashflow",
+      "claim_ids": [
+        "c1"
+      ],
+      "asset_ids": [
+        "money"
+      ],
+      "audio_path": "audio/beat_01.wav",
+      "clip_path": "scenes/beat_01.mp4",
+      "tail_s": 0.35,
+      "layers": [
+        {
+          "id": "fund",
+          "role": "Quỹ tiền minh họa"
+        },
+        {
+          "id": "obligation",
+          "role": "Lịch dịch vụ tương lai"
+        }
+      ],
+      "events": [
+        {
+          "target": "fund",
+          "trigger_phrase": "Tiền đến trước",
+          "action": "move cash token into fund",
+          "meaning": "Tiền nhận tại thời điểm ban đầu."
+        }
+      ]
+    },
+    {
+      "id": "02",
+      "narration": "Trong những tháng tiếp theo, tiền thuê và lương vẫn đến hạn. Thu được tiền không đồng nghĩa toàn bộ số đó là lợi nhuận.",
+      "purpose": "Giải thích khác biệt giữa tiền nhận và chi phí phục vụ.",
+      "scene_type": "obligation_timeline",
+      "claim_ids": [
+        "c1"
+      ],
+      "asset_ids": [],
+      "audio_path": "audio/beat_02.wav",
+      "clip_path": "scenes/beat_02.mp4",
+      "tail_s": 0.35,
+      "layers": [
+        {
+          "id": "costs",
+          "role": "Các khoản chi định kỳ có nhãn"
+        }
+      ],
+      "events": [
+        {
+          "target": "costs",
+          "trigger_phrase": "vẫn đến hạn",
+          "action": "reveal labeled monthly obligations",
+          "meaning": "Các nghĩa vụ ở nhiều thời điểm, không phải mọi chi phí phát sinh ngay."
+        }
+      ]
+    }
+  ]
+}
