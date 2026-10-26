@@ -1,25 +1,17 @@
-# make-editorial-explainer — Hermes-first v1.0
+# make-editorial-explainer — Hermes-first v1.1.0
 
 Bộ skill hướng dẫn sản xuất explainer tiếng Việt theo bốn video tham chiếu của
 người dùng: PNJ, Singapore, gym và hàng không. Không phải app tạo video có sẵn,
 không bundle model/HyperFrames, không cấp API, không giả nối Gemini web.
 
-## Cài Hermes (trên máy của anh, chưa được thực hiện trong chat)
-Giải nén ZIP ra một thư mục tạm, xem file trước; copy thư mục
-`make-editorial-explainer` vào `~/.hermes/skills/`. Không ghi đè skill có sẵn:
-```bash
-mkdir -p ~/.hermes/skills
-test ! -e ~/.hermes/skills/make-editorial-explainer && \
-  cp -R make-editorial-explainer ~/.hermes/skills/
-```
-Nếu profile có HERMES_HOME riêng, dùng skills directory của profile đó. Không
-chạy cp khi đường dẫn đích đã tồn tại; backup/diff trước. Dùng phiên chat mới
-nếu skill chưa hiện. Hermes hỗ trợ SKILL.md và slash command theo tên skill.
-
-Ưu tiên liên kết thay vì copy (một nguồn, không lệch bản): Windows
-`mklink /J "<hermes skills>\make-editorial-explainer" "<đường dẫn gói>"` (Hermes v0.22.5 đã thấy ở
-`%LOCALAPPDATA%\hermes\skills\`), Linux/macOS `ln -s`. Copy chỉ khi Hermes không đi theo link.
+## Cài Hermes
+Liên kết thư mục `make-editorial-explainer` vào skills directory của Hermes (một nguồn, không lệch bản):
+Windows `mklink /J "<hermes skills>\make-editorial-explainer" "<đường dẫn gói>"`, Linux/macOS `ln -s`.
+Hermes v0.22.5 trên máy này có skills dir `%LOCALAPPDATA%\hermes\skills\`; nơi khác lấy đúng dir mà Hermes báo
+(mặc định `${HERMES_HOME:-~/.hermes}/skills/`). Không ghi đè skill có sẵn; backup/diff trước.
+Copy chỉ khi Hermes không đi theo link (`cp -R`, chỉ khi đích chưa tồn tại).
 Hermes, VieNeu, ffmpeg và HyperFrames phải cùng phía (Windows hoặc WSL).
+Dùng phiên chat mới nếu skill chưa hiện. `hermes skills list` thấy skill; lệnh slash chưa ai chạy.
 
 ## Biến môi trường
 Doctor đọc VIENEU_PYTHON, VIENEU_VOICE, HYPERFRAMES_CMD. Mẫu: `examples/runtime.env.example`.
@@ -39,7 +31,7 @@ Có: workflow, 3 nhóm visual, 10 scene types, nguồn/semantic QC, Gemini/Muse
 handoff, cấu hình Hermes, portability guide, schema, ví dụ, helper project,
 VieNeu batch, measure và basic assembly, test tự động.
 Chưa có: renderer scene library hoàn chỉnh, cài HyperFrames, đăng nhập Gemini,
-bridge Muse/Hermes, forced alignment tiếng Việt, test end-to-end trên VM anh.
+bridge Muse/Hermes, forced alignment tiếng Việt, test end-to-end trên máy anh.
 Các scene types là đặc tả để agent triển khai, KHÔNG phải component đã render.
 
 ## Kiểm tra helper
