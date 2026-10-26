@@ -16,6 +16,15 @@ Nếu profile có HERMES_HOME riêng, dùng skills directory của profile đó.
 chạy cp khi đường dẫn đích đã tồn tại; backup/diff trước. Dùng phiên chat mới
 nếu skill chưa hiện. Hermes hỗ trợ SKILL.md và slash command theo tên skill.
 
+Windows native: chép vào `%USERPROFILE%\.hermes\skills\` (PowerShell:
+`if (-not (Test-Path $d)) { Copy-Item -Recurse make-editorial-explainer $d }` với
+`$d = "$env:USERPROFILE\.hermes\skills\make-editorial-explainer"`). Hermes, VieNeu, ffmpeg
+và HyperFrames phải cùng phía (Windows hoặc WSL).
+
+## Biến môi trường
+Doctor đọc VIENEU_PYTHON, VIENEU_VOICE, HYPERFRAMES_CMD. Mẫu: `examples/runtime.env.example`.
+Bảng mặc định ở `references/runtime-hermes.md`.
+
 ## Gọi
 ```text
 /make-editorial-explainer Làm pilot 20–30 giây về [chủ đề].
@@ -36,8 +45,9 @@ Các scene types là đặc tả để agent triển khai, KHÔNG phải compone
 ## Kiểm tra helper
 Python 3.10+; measure/assembly cần ffmpeg/ffprobe trên PATH. Không pip install.
 ```bash
-python3 scripts/test_tools.py
+<py> scripts/test_tools.py
 ```
+`<py>` = `python3` trên Linux/WSL, `py -3` trên Windows.
 Xem TEST_REPORT.md cho kiểm thử thực tế ở môi trường đóng gói. Scripts không
 phải sandbox: vẫn review code/paths trước khi chạy ở máy sản xuất.
 
@@ -47,6 +57,6 @@ quyền của một hãng. Cần terminal/file tools để sản xuất; một c
 chỉ có thể lập kế hoạch/prompt, không tự render. Đọc references/portability.md.
 
 ## Cập nhật và bản quyền
-Giữ version trong skill và dự án. Tài liệu là bản tổng hợp mới, không đóng gói
+Hai version độc lập: `1.1.0` trong frontmatter SKILL.md là version của skill (đổi khi sửa skill); `1.0` trong project.json là version schema dự án (`templates/project.schema.json`, `check` từ chối giá trị khác). Không bump chung. Tài liệu là bản tổng hợp mới, không đóng gói
 code/asset bên thứ ba. Tài nguyên của từng repo, font, nhạc, footage giữ giấy
 phép riêng. Đọc references/source-notes.md trước khi copy component bên ngoài.

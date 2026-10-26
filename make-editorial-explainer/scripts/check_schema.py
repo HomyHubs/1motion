@@ -12,7 +12,10 @@ def check(s,v,path='$'):
     kinds={'object':lambda x:isinstance(x,dict),'array':lambda x:isinstance(x,list),
            'string':lambda x:isinstance(x,str),'integer':lambda x:type(x)is int,
            'number':lambda x:type(x)in(int,float)}
-    if 'type'in s and not kinds[s['type']](v): return [path+': wrong type']
+    if 'type'in s:
+        kind=kinds.get(s['type']) if isinstance(s['type'],str) else None
+        if kind is None: return [path+': unsupported schema type '+json.dumps(s['type'])]
+        if not kind(v): return [path+': wrong type']
     if 'const'in s and v!=s['const']: errors.append(path+': wrong const')
     if 'enum'in s and v not in s['enum']: errors.append(path+': wrong enum')
     if isinstance(v,dict):
@@ -35,6 +38,6 @@ def check(s,v,path='$'):
 if __name__=='__main__':
     root=Path(__file__).resolve().parents[1]
     doc=Path(sys.argv[1]) if len(sys.argv)>1 else root/'examples/pilot.project.json'
-    errors=check(json.loads((root/'templates/project.schema.json').read_text()),json.loads(doc.read_text()))
+    errors=check(json.loads((root/'templates/project.schema.json').read_text(encoding='utf-8')),json.loads(doc.read_text(encoding='utf-8')))
     print(json.dumps({'ok':not errors,'scope':'bundled schema keyword subset; not full metaschema validation','errors':errors},ensure_ascii=False,indent=2))
     raise SystemExit(bool(errors))

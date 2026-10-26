@@ -2,19 +2,35 @@
 """Local helper tests. Integration uses synthetic tone/colour, not VieNeu or a motion renderer."""
 import copy
 import json
+import os
 from pathlib import Path
 import shutil
 import subprocess
+import sys
 import tempfile
 import unittest
+from unittest import mock
 import project_tools as t
 
 class Helpers(unittest.TestCase):
     def setUp(self):
         self.tmp=tempfile.TemporaryDirectory();self.root=Path(self.tmp.name)/'pilot'
-        t.init(self.root);self.doc=t.load(self.root)
+        t.init(self.root)
+        shutil.copyfile(t.ROOT/'examples/pilot.project.json',self.root/'project.json');self.doc=t.load(self.root)
     def tearDown(self): self.tmp.cleanup()
     def test_example(self): self.assertEqual(t.validate(self.doc,self.root),[])
+    def test_init_is_blank(self):
+        blank=Path(self.tmp.name)/'blank';t.init(blank);doc=t.load(blank)
+        self.assertEqual([doc['sources'],doc['claims'],doc['assets'],doc['beats']],[[],[],[],[]])
+        self.assertEqual(sorted(t.validate(doc,blank)),['At least one beat required','Empty title'])
+        caps=json.loads((blank/'capabilities.json').read_text(encoding='utf-8'))
+        self.assertEqual(caps['runtime']['tools']['python3'],sys.executable)
+    def test_doctor_honors_env_overrides(self):
+        fake=self.root/'fake-python'
+        fake.write_text('',encoding='utf-8')
+        with mock.patch.dict(os.environ,{'VIENEU_PYTHON':str(fake),'VIENEU_VOICE':'v1','HYPERFRAMES_CMD':'hf-cmd'}):
+            report=t.doctor()
+        self.assertEqual((report['vieneu_python'],report['vieneu_python_exists'],report['vieneu_voice'],report['tools']['hyperframes']),(str(fake),True,'v1','hf-cmd'))
     def test_refuse_existing(self):
         with self.assertRaises(ValueError): t.init(self.root)
     def test_duplicate_and_unknown(self):
@@ -25,7 +41,9 @@ class Helpers(unittest.TestCase):
     def test_path_traversal(self):
         self.doc['beats'][0]['audio_path']='../outside.wav'
         self.assertTrue(any('escapes' in e for e in t.validate(self.doc,self.root)))
-        (self.root/'assets'/'escape').symlink_to(self.root.parent,target_is_directory=True)
+    def test_symlink_escape(self):
+        try: (self.root/'assets'/'escape').symlink_to(self.root.parent,target_is_directory=True)
+        except (OSError,NotImplementedError) as e: self.skipTest('cannot create symlink here: '+str(e))
         with self.assertRaises(ValueError): t.inside(self.root,'assets/escape/outside.wav')
     def test_missing_assets_and_final_gates(self):
         errs=t.validate(self.doc,self.root,True,True)

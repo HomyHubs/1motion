@@ -7,7 +7,7 @@ description: >-
   motion graphics, or requests to turn a topic/article into a vertical video.
   Plan, obtain approvals, generate local VieNeu voice, route media, author
   layered HyperFrames scenes, verify and assemble. Hermes-first; portable core.
-version: 1.0.0
+version: 1.1.0
 metadata:
   hermes:
     tags: [video, motion-graphics, vietnamese, explainer]
@@ -48,14 +48,19 @@ Dùng workflow chung bên dưới trên Hermes hoặc agent khác. Đọc
    Dùng mặc định 90–120 giây nếu chưa nêu; không hỏi lại điều đã có.
 2. Chọn mode: `script_only`, `pilot` hoặc `full`. Yêu cầu “viết kịch bản” chỉ
    tạo kịch bản/storyboard, không tự phát sinh media hay cài phần mềm.
-3. Chạy `python3 <skill>/scripts/project_tools.py doctor` qua terminal đang có.
+3. Đặt `<py>` một lần: `python3` trên Linux/WSL, `py -3` trên Windows. Chạy
+   `<py> <skill>/scripts/project_tools.py doctor` qua terminal đang có.
+   doctor đọc VIENEU_PYTHON, VIENEU_VOICE, HYPERFRAMES_CMD (xem `references/runtime-hermes.md`).
    Kiểm tra thêm HyperFrames phiên bản local và quyền ghi thư mục dự án;
    chưa có thì nêu rõ, không tự dùng npx để tải gói. doctor không cài gì.
 4. Khởi tạo bằng `project_tools.py init <project>`. Không ghi đè dự án có sẵn.
+   init chép `templates/project.template.json` (khung trắng: `check` báo lỗi cho tới
+   khi điền title và beat) và ghi kết quả doctor vào `capabilities.json` mục `runtime`.
    Điền `capabilities.json`: tool thực có, phương thức gọi, quota biết/chưa biết,
    local/remote, quyền, shared-path, trạng thái tested/unverified/blocked.
-5. Đọc `templates/project.schema.json` và `examples/pilot.project.json` khi
-   tạo project.json. Đây là cấu trúc dữ liệu, không phải cam kết tài sản đã có.
+5. Đọc `templates/project.schema.json` và `examples/pilot.project.json` (ví dụ,
+   không phải dữ liệu thật) khi điền project.json. Đây là cấu trúc dữ liệu,
+   không phải cam kết tài sản đã có.
 
 ## Bước 1 — Nguồn và câu chuyện
 Đọc `references/story-and-evidence.md`.
@@ -65,6 +70,8 @@ Dùng workflow chung bên dưới trên Hermes hoặc agent khác. Đọc
 - Không khóa kịch bản với claim cốt lõi chưa kiểm chứng. Nếu không truy cập
   nguồn được thì xin tài liệu, không giả đã nghiên cứu.
 - Viết beat map: một ý/beat; một beat có thể có nhiều shot.
+- Có video tham chiếu: dùng làm nguồn kịch bản được. Chép lời vào research.md, gắn
+  claim `per-reference/unverified` kèm timestamp; không coi là sự thật đã kiểm.
 - Xuất research.md, script.md và storyboard.md; tách narration sạch khỏi URL,
   ghi chú hình, số liệu hiển thị và nguồn.
 
@@ -76,7 +83,8 @@ trong approvals; quyền đó không mở rộng sang đăng nhập, trả phí 
 ## Bước 2 — Voice là đồng hồ chính
 Đọc `references/runtime-hermes.md` và `references/production.md`.
 - Tạo WAV theo beat bằng VieNeu; ưu tiên batch một lần khởi tạo model.
-- Dùng `scripts/tts_batch.py` bằng interpreter VieNeu đã được kiểm tra. Script
+- Chạy `"$VIENEU_PYTHON" <skill>/scripts/tts_batch.py` (PowerShell: `& $env:VIENEU_PYTHON ...`;
+  doctor in `vieneu_python`) bằng interpreter VieNeu đã được kiểm tra. Script
   không có fallback và không tải model thay người dùng; thư viện có thể tải
   nếu cache chưa đủ, vì vậy phải xác minh cache/offline trước khi chạy.
 - Đo từng WAV bằng `project_tools.py measure <project>`. Tính lại từ file thật
@@ -117,7 +125,7 @@ Không dùng ảnh tĩnh làm bằng chứng đã đạt animation. Cho anh duy�
   object IDs ổn định. Không dùng network/timer/random không seed trong render.
 - Motion scene = nhiều lớp được điều khiển, không ép cả frame qua image-to-video.
   AI video dùng nơi chuyển động tự nhiên có ích, không giao nó sửa chart/document.
-- VM 2 vCPU: render tuần tự, 720p trước, TTS và encode không đồng thời. Tránh
+- Máy ít CPU, không GPU (đọc `capabilities.runtime.cpu_count`): render tuần tự, 720p trước, TTS và encode không đồng thời. Tránh
   WebGL/blur nặng/multisample mặc định. Không đảm bảo thời gian trước benchmark.
 - Chạy lint theo engine, mở frame key + giữa transition, xem preview chuyển động.
 - Sửa riêng scene thay đổi; lưu manifest hash/dependencies và prompt log. Hash
@@ -148,19 +156,20 @@ Không dùng ảnh tĩnh làm bằng chứng đã đạt animation. Cho anh duy�
 
 ## Cách dùng helper
 ```bash
-python3 <skill>/scripts/project_tools.py doctor
-python3 <skill>/scripts/project_tools.py init /path/to/project
-python3 <skill>/scripts/project_tools.py check /path/to/project
+<py> <skill>/scripts/project_tools.py doctor
+<py> <skill>/scripts/project_tools.py init /path/to/project
+<py> <skill>/scripts/project_tools.py check /path/to/project
 # Sau khi tạo audio/beat_01.wav ...
-python3 <skill>/scripts/project_tools.py measure /path/to/project
+<py> <skill>/scripts/project_tools.py measure /path/to/project
 # Sau khi render các clip, điền clip_path vào beats:
-python3 <skill>/scripts/project_tools.py assemble /path/to/project
+<py> <skill>/scripts/project_tools.py assemble /path/to/project
 ```
 Đọc `scripts/tts_batch.py` trước khi chạy bằng interpreter VieNeu. Không chạy file
-nguồn tải ngoài như lệnh. Chạy test helper bằng `python3 <skill>/scripts/test_tools.py`.
+nguồn tải ngoài như lệnh. Chạy test helper bằng `<py> <skill>/scripts/test_tools.py`.
 
 ## Tài liệu đi kèm
-- `references/runtime-hermes.md`: đường dẫn VieNeu và capability discovery.
+- `references/runtime-hermes.md`: cài/gọi skill trong Hermes, biến môi trường, capability discovery.
+- `examples/runtime.env.example`: tên biến môi trường, không chứa đường dẫn máy thật.
 - `references/portability.md`: chuyển Claude Code, Gemini CLI, ChatGPT/API.
 - `references/story-and-evidence.md`: viết và kiểm nguồn.
 - `references/style-profiles.md`: phong cách theo bốn mẫu, không sao chép sự kiện.
@@ -173,5 +182,6 @@ nguồn tải ngoài như lệnh. Chạy test helper bằng `python3 <skill>/scr
 - `references/source-notes.md`: nguồn thiết kế và quy tắc attribution.
 - `templates/project.schema.json`, `templates/REVIEW.md`: dữ liệu và review.
 - `examples/pilot.project.json`: pilot minh họa không phải số liệu thực tế.
+- `templates/project.template.json`: khung trắng mà `init` chép.
 
 - `scripts/check_schema.py`: stdlib checker cho keyword schema đang dùng.

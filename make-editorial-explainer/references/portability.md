@@ -7,6 +7,7 @@
 | Gemini CLI | Cùng nội dung workflow | xác minh hỗ trợ skills của bản đó; tên tool và provider |
 | ChatGPT web/custom GPT | Instructions + tài liệu tham chiếu | không mặc định có filesystem bền vững, CLI hay VieNeu |
 | ChatGPT qua API/agent runner | Core + schema | host triển khai shell/file/browser adapters có quyền |
+| Windows native host | Cùng SKILL.md | `py -3` thay `python3`; venv VieNeu ở `Scripts\python.exe`; tạo symlink cần quyền; terminal của agent và tool phải cùng phía (không trộn WSL với Windows) |
 
 Không viết lại logic kể chuyện khi chuyển model. Đổi adapter và capability map.
 Giữ 3 lớp: core workflow / provider contracts / runtime config. Không nhét

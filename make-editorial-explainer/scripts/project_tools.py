@@ -202,7 +202,7 @@ def assemble(root):
                  '-crf','20','-threads','1','-pix_fmt','yuv420p','-c:a','aac','-ar','48000','-ac','2',seg])
             segments.append(seg)
         listing=temp/'concat.txt'
-        listing.write_text(''.join("file '"+str(p).replace("'","'\\''")+"'\n" for p in segments))
+        listing.write_text(''.join("file '"+str(p).replace("'","'\\''")+"'\n" for p in segments),encoding='utf-8')
         rendered=temp/'joined.mp4'
         run(['ffmpeg','-v','error','-nostdin','-y','-f','concat','-safe','0','-i',listing,'-c','copy','-movflags','+faststart',rendered])
         run(['ffmpeg','-v','error','-nostdin','-i',rendered,'-f','null','-'])
@@ -222,15 +222,24 @@ def init(root):
     if root.exists(): raise ValueError('Refuse existing project directory')
     root.mkdir(parents=True)
     for d in ['audio','assets','sources','scenes','captions','final','logs']: (root/d).mkdir()
-    shutil.copyfile(ROOT/'examples/pilot.project.json',root/'project.json')
-    save(root/'capabilities.json',{'status':'unverified','providers':[],'shared_filesystem':'unverified'})
+    shutil.copyfile(ROOT/'templates/project.template.json',root/'project.json')
+    save(root/'capabilities.json',{'status':'unverified','providers':[],'shared_filesystem':'unverified','runtime':doctor()})
     shutil.copyfile(ROOT/'templates/REVIEW.md',root/'REVIEW.md')
 
+def vieneu_python():
+    override=os.environ.get('VIENEU_PYTHON')
+    if override: return Path(override)
+    return Path.home()/'.venvs/vieneu'/('Scripts/python.exe' if os.name=='nt' else 'bin/python')
+
 def doctor():
-    tools={k:shutil.which(k) for k in ['python3','ffmpeg','ffprobe','node','chromium','chromium-browser','hyperframes']}
-    return {'tools':tools,'python':sys.version.split()[0],
-            'vieneu_python_exists':(Path.home()/'.venvs/vieneu/bin/python').is_file(),
-            'vieneu_wrapper_exists':(Path.home()/'workspace/tts-vi/tts-vi.sh').is_file(),
+    tools={k:shutil.which(k) for k in ['ffmpeg','ffprobe','node','chromium','chromium-browser']}
+    tools['python3']=sys.executable
+    tools['hyperframes']=os.environ.get('HYPERFRAMES_CMD') or shutil.which('hyperframes')
+    vieneu=vieneu_python()
+    return {'tools':tools,'python':sys.version.split()[0],'os':sys.platform,'cpu_count':os.cpu_count(),
+            'disk_free_gb':round(shutil.disk_usage(Path.cwd()).free/2**30,1),
+            'vieneu_python':str(vieneu),'vieneu_python_exists':vieneu.is_file(),
+            'vieneu_voice':os.environ.get('VIENEU_VOICE'),
             'notice':'Paths only. No installation, network, model import, media endpoint or benchmark performed.'}
 
 def main():

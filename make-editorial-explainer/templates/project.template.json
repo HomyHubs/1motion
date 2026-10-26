@@ -1,0 +1,18 @@
+{
+  "version": "1.0",
+  "title": "",
+  "mode": "script_only",
+  "format": {
+    "width": 720,
+    "height": 1280,
+    "fps": 30
+  },
+  "approvals": {
+    "story": "pending",
+    "pilot": "pending"
+  },
+  "sources": [],
+  "claims": [],
+  "assets": [],
+  "beats": []
+}

@@ -27,5 +27,5 @@ khi phần bắt buộc còn pending.
 
 ## Benchmark VM
 Ghi wall time và peak RAM riêng TTS/render/encode; ghi versions, resolution,
-fps, độ dài và số layer. Không dùng benchmark máy đóng gói thay VM người dùng.
+fps, độ dài và số layer. Không dùng benchmark máy đóng gói thay máy người dùng.
 Skill bundle test không đồng nghĩa đã test HyperFrames/VieNeu/Gemini integration.

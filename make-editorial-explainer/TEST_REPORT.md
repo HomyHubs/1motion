@@ -13,6 +13,15 @@
 - Assembly integration uses tiny synthetic colour video + tone. It is NOT a
   visual-quality demo, listening test or production benchmark.
 
+## Re-run on Windows (py -3 3.13.15, ffmpeg/ffprobe on PATH)
+- `py -3 scripts/test_tools.py`: 11 tests, 10 PASS, 1 SKIP. The skip is `test_symlink_escape`: creating a symlink needs a privilege this account lacks (WinError 1314). The `..` escape is still tested; the symlink escape is tested only where symlinks can be created.
+- The original "8 PASS" assumed Linux, ffmpeg and symlink rights. Without ffmpeg, two tests skip.
+- Changed tests: `test_init_is_blank` (new: init gives empty sources/claims/assets/beats and `check` rejects it until a title and a beat exist); `test_doctor_honors_env_overrides` (new: VIENEU_PYTHON, VIENEU_VOICE, HYPERFRAMES_CMD reach the doctor report); `test_path_traversal` split in two; fixtures copy `examples/pilot.project.json` explicitly because `init` now copies `templates/project.template.json`.
+- `doctor` resolves VieNeu from `$VIENEU_PYTHON`, else `~/.venvs/vieneu/Scripts/python.exe` (Windows) or `bin/python` (POSIX); the `tts-vi.sh` wrapper probe is gone; `python3` reports `sys.executable`; `init` stores the report under `capabilities.json` `runtime`. `py -3 scripts/project_tools.py doctor` on this box now reports `vieneu_python_exists: true`.
+- `assemble()` writes the ffmpeg concat list as UTF-8. The assemble test runs with an ASCII temp path, so a non-ASCII path is unverified.
+- SKILL.md is 1.1.0: `<py>` placeholder, `$VIENEU_PYTHON` for `tts_batch.py`, reference-video line in Bước 1. No Hermes load proof yet (see below).
+- `check_schema.py` reads UTF-8 explicitly and reports an unsupported schema type instead of raising KeyError.
+
 ## Not executed / not claimed
 - Hermes skill discovery on the user's install.
 - VieNeu inference (target model/interpreter unavailable here).
