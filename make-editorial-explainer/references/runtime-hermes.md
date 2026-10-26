@@ -3,7 +3,7 @@
 ## Cài và gọi
 - Cài: liên kết thư mục skill vào skills dir của Hermes, không copy (một nguồn duy nhất, sửa là thấy ngay). Windows: `mklink /J "<hermes skills>\make-editorial-explainer" "<đường dẫn gói>"`; Linux/macOS: `ln -s`. Chỉ copy khi Hermes không đi theo link. Skills dir: `${HERMES_HOME:-~/.hermes}/skills/`; trên Windows đã thấy `%LOCALAPPDATA%\hermes\skills\` (Hermes v0.22.5). Không ghi đè skill có sẵn.
 - VieNeu, ffmpeg, HyperFrames phải nằm cùng phía với terminal của Hermes: tool trong WSL không phải tool Windows.
-- Gọi: `/make-editorial-explainer <brief>`. Dùng phiên chat mới nếu skill chưa hiện.
+- Gọi: `/make-editorial-explainer <brief>`. ASSUMPTION: Hermes v0.22.5 đã liệt kê skill (`hermes skills list`), nhưng chưa ai chạy lệnh gọi này trong Hermes. Dùng phiên chat mới nếu skill chưa hiện.
 - Terminal: mọi bước là lệnh shell qua terminal tool Hermes thực sự cung cấp. Core không dùng tên MCP/tool đặc quyền.
 
 ## Biến môi trường (doctor đọc)
