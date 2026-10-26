@@ -6,6 +6,10 @@ Vị trí file: đặt ở gốc repo `1motion/` (ngoài gói skill) để khôn
 
 Trạng thái: `[ ]` chưa làm · `[x]` đã vá · `[?]` cần anh chốt hướng trước khi sửa code.
 
+## Release & Mốc gốc
+
+- **v1.0.0-initial** (commit `bd1cdb3`): Tag snapshot ban đầu khi vừa import skill, kịch bản ghi chép và 5 video tham khảo vào repo [HomyHubs/1motion](https://github.com/HomyHubs/1motion). Đã push lên GitHub ngày 2026-10-27.
+
 ## Bảng ưu tiên
 
 | Mã | Ưu tiên | Trạng thái | Loại | Vấn đề (1 dòng) | Hướng vá |
