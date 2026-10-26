@@ -55,7 +55,8 @@ Dùng workflow chung bên dưới trên Hermes hoặc agent khác. Đọc
    chưa có thì nêu rõ, không tự dùng npx để tải gói. doctor không cài gì.
 4. Khởi tạo bằng `project_tools.py init <project>`. Không ghi đè dự án có sẵn.
    init chép `templates/project.template.json` (khung trắng: `check` báo lỗi cho tới
-   khi điền title và beat) và ghi kết quả doctor vào `capabilities.json` mục `runtime` (ảnh chụp lúc init: chạy lại doctor ở mỗi gate).
+   khi điền title và beat). Chạy lại doctor ở mỗi gate cần công cụ (Bước 0, trước voice, trước render):
+   output lần chạy đó là sự thật duy nhất, không lưu bản sao.
    Điền `capabilities.json`: tool thực có, phương thức gọi, quota biết/chưa biết,
    local/remote, quyền, shared-path, trạng thái tested/unverified/blocked.
 5. Đọc `templates/project.schema.json` và `examples/pilot.project.json` (ví dụ,
@@ -125,7 +126,7 @@ Không dùng ảnh tĩnh làm bằng chứng đã đạt animation. Cho anh duy�
   object IDs ổn định. Không dùng network/timer/random không seed trong render.
 - Motion scene = nhiều lớp được điều khiển, không ép cả frame qua image-to-video.
   AI video dùng nơi chuyển động tự nhiên có ích, không giao nó sửa chart/document.
-- Máy ít CPU, không GPU (đọc `capabilities.runtime.cpu_count`): render tuần tự, 720p trước, TTS và encode không đồng thời. Tránh
+- Máy ít CPU, không GPU (đọc `cpu_count` từ doctor): render tuần tự, 720p trước, TTS và encode không đồng thời. Tránh
   WebGL/blur nặng/multisample mặc định. Không đảm bảo thời gian trước benchmark.
 - Chạy lint theo engine, mở frame key + giữa transition, xem preview chuyển động.
 - Sửa riêng scene thay đổi; lưu manifest hash/dependencies và prompt log. Hash
@@ -160,7 +161,7 @@ Không dùng ảnh tĩnh làm bằng chứng đã đạt animation. Cho anh duy�
 <py> <skill>/scripts/project_tools.py init /path/to/project
 # check báo lỗi ngay sau init (khung trắng) cho tới khi điền title và beat
 <py> <skill>/scripts/project_tools.py check /path/to/project
-<py> <skill>/scripts/project_tools.py voice /path/to/project --cache-confirmed
+<py> <skill>/scripts/project_tools.py voice /path/to/project --cache-confirmed --only beat_01 beat_02
 # Sau khi có audio/beat_01.wav ...
 <py> <skill>/scripts/project_tools.py measure /path/to/project
 # Sau khi render các clip, điền clip_path vào beats:

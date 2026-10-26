@@ -1,7 +1,7 @@
 # Hermes adapter
 
 ## Cài và gọi
-- Cài: chép thư mục skill vào `${HERMES_HOME:-~/.hermes}/skills/` ở phía chạy terminal của Hermes (Linux/WSL: `~/.hermes/skills/`; Windows native: `%USERPROFILE%\.hermes\skills\`). Không ghi đè skill có sẵn; backup/diff trước.
+- Cài: liên kết thư mục skill vào skills dir của Hermes, không copy (một nguồn duy nhất, sửa là thấy ngay). Windows: `mklink /J "<hermes skills>\make-editorial-explainer" "<đường dẫn gói>"`; Linux/macOS: `ln -s`. Chỉ copy khi Hermes không đi theo link. Skills dir: `${HERMES_HOME:-~/.hermes}/skills/`; trên Windows đã thấy `%LOCALAPPDATA%\hermes\skills\` (Hermes v0.22.5). Không ghi đè skill có sẵn.
 - VieNeu, ffmpeg, HyperFrames phải nằm cùng phía với terminal của Hermes: tool trong WSL không phải tool Windows.
 - Gọi: `/make-editorial-explainer <brief>`. Dùng phiên chat mới nếu skill chưa hiện.
 - Terminal: mọi bước là lệnh shell qua terminal tool Hermes thực sự cung cấp. Core không dùng tên MCP/tool đặc quyền.
@@ -13,7 +13,7 @@
 | VIENEU_VOICE | tên giọng, một giọng xuyên video | Mai Anh |
 | HYPERFRAMES_CMD | lệnh HyperFrames khi không nằm trên PATH | `hyperframes` trên PATH |
 
-Mẫu ở `examples/runtime.env.example`. Đường dẫn máy cụ thể không viết vào tài liệu của gói. ASSUMPTION: Hermes nạp `~/.hermes/.env` vào terminal; xác minh khi chạy.
+Mẫu ở `examples/runtime.env.example`. Đường dẫn máy cụ thể không viết vào tài liệu của gói. ASSUMPTION: Hermes nạp `<hermes home>/.env` vào terminal; xác minh khi chạy.
 
 ## Cấu hình người dùng cung cấp — phải xác minh lại khi chạy
 - Muse chat web: nhận prompt và trả file. Chưa xác minh bridge với Hermes.
@@ -23,7 +23,7 @@ Mẫu ở `examples/runtime.env.example`. Đường dẫn máy cụ thể không
 ## Discovery
 Dùng terminal/file/web tools mà Hermes phiên này thực sự cung cấp; không bịa tên
 MCP/tool. Skill không tự bật browser, media hay quyền đọc file ngoài workspace.
-Chạy doctor: nó là probe duy nhất, kết quả JSON nằm trong `capabilities.json` mục `runtime` và là sự thật của dự án.
+Chạy doctor: nó là probe duy nhất, chạy lại ở mỗi gate cần công cụ; output lần chạy đó là sự thật duy nhất, không lưu bản sao. Trình duyệt cho HyperFrames do `hyperframes doctor` kiểm.
 Doctor báo đường dẫn thật, version Python, ffmpeg, HyperFrames và cpu_count.
 Chỉ chạy --help/version của công cụ đã có, không npx tự download.
 Ghi tất cả vào capabilities.json, trạng thái unverified cho thứ chưa test.
@@ -43,7 +43,7 @@ người dùng đã gửi. API có thể đổi; fail nếu không tương thíc
 Lần chạy đầu: nếu model chưa có trong cache, tải một lần khi anh đồng ý (model công khai, không cần tài khoản),
 rồi mới bật chế độ offline và dùng `--cache-confirmed`. Không tải ngầm.
 
-Lỗi ONNX external .data qua symlink từng gặp theo báo cáo: không tự thay cả HF
+Lỗi ONNX external .data qua symlink từng gặp theo báo cáo trên VM Linux (Windows: HF cache copy file nên không gặp, theo hands): không tự thay cả HF
 snapshot. Kiểm tra lỗi/path/version; nếu cần, đề xuất copy model sang cache riêng,
 đủ các external data file, kiểm hash và dung lượng; xin phép trước khi thay cache.
 

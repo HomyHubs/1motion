@@ -23,14 +23,14 @@ class Helpers(unittest.TestCase):
         blank=Path(self.tmp.name)/'blank';t.init(blank);doc=t.load(blank)
         self.assertEqual([doc['sources'],doc['claims'],doc['assets'],doc['beats']],[[],[],[],[]])
         self.assertEqual(sorted(t.validate(doc,blank)),['At least one beat required','Empty title'])
-        caps=json.loads((blank/'capabilities.json').read_text(encoding='utf-8'))
-        self.assertEqual(caps['runtime']['tools']['python3'],sys.executable)
+        self.assertNotIn('runtime',json.loads((blank/'capabilities.json').read_text(encoding='utf-8')))
     def test_doctor_honors_env_overrides(self):
         fake=self.root/'fake-python'
         fake.write_text('',encoding='utf-8')
         with mock.patch.dict(os.environ,{'VIENEU_PYTHON':str(fake),'VIENEU_VOICE':'v1','HYPERFRAMES_CMD':'hf-cmd'}):
             report=t.doctor()
         self.assertEqual((report['vieneu_python'],report['vieneu_python_exists'],report['vieneu_voice'],report['tools']['hyperframes']),(str(fake),True,'v1','hf-cmd'))
+        self.assertEqual(report['tools']['python'],sys.executable)
     def test_voice_requires_vieneu_interpreter(self):
         with mock.patch.dict(os.environ,{'VIENEU_PYTHON':str(self.root/'missing-python')}):
             with self.assertRaisesRegex(ValueError,'VieNeu interpreter not found'): t.voice(self.root,[])

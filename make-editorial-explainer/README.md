@@ -16,10 +16,10 @@ Nếu profile có HERMES_HOME riêng, dùng skills directory của profile đó.
 chạy cp khi đường dẫn đích đã tồn tại; backup/diff trước. Dùng phiên chat mới
 nếu skill chưa hiện. Hermes hỗ trợ SKILL.md và slash command theo tên skill.
 
-Windows native: chép vào `%USERPROFILE%\.hermes\skills\` (PowerShell:
-`if (-not (Test-Path $d)) { Copy-Item -Recurse make-editorial-explainer $d }` với
-`$d = "$env:USERPROFILE\.hermes\skills\make-editorial-explainer"`). Hermes, VieNeu, ffmpeg
-và HyperFrames phải cùng phía (Windows hoặc WSL).
+Ưu tiên liên kết thay vì copy (một nguồn, không lệch bản): Windows
+`mklink /J "<hermes skills>\make-editorial-explainer" "<đường dẫn gói>"` (Hermes v0.22.5 đã thấy ở
+`%LOCALAPPDATA%\hermes\skills\`), Linux/macOS `ln -s`. Copy chỉ khi Hermes không đi theo link.
+Hermes, VieNeu, ffmpeg và HyperFrames phải cùng phía (Windows hoặc WSL).
 
 ## Biến môi trường
 Doctor đọc VIENEU_PYTHON, VIENEU_VOICE, HYPERFRAMES_CMD. Mẫu: `examples/runtime.env.example`.

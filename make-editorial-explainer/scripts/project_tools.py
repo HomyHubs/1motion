@@ -223,7 +223,7 @@ def init(root):
     root.mkdir(parents=True)
     for d in ['audio','assets','sources','scenes','captions','final','logs']: (root/d).mkdir()
     shutil.copyfile(ROOT/'templates/project.template.json',root/'project.json')
-    save(root/'capabilities.json',{'status':'unverified','providers':[],'shared_filesystem':'unverified','runtime':doctor()})
+    save(root/'capabilities.json',{'status':'unverified','providers':[],'shared_filesystem':'unverified'})
     shutil.copyfile(ROOT/'templates/REVIEW.md',root/'REVIEW.md')
 
 def vieneu_python():
@@ -237,8 +237,8 @@ def voice(root,extra):
     return subprocess.run([str(interpreter),str(ROOT/'scripts/tts_batch.py'),str(root),*extra]).returncode
 
 def doctor():
-    tools={k:shutil.which(k) for k in ['ffmpeg','ffprobe','node','chromium','chromium-browser']}
-    tools['python3']=sys.executable
+    tools={k:shutil.which(k) for k in ['ffmpeg','ffprobe','node']}
+    tools['python']=sys.executable
     tools['hyperframes']=os.environ.get('HYPERFRAMES_CMD') or shutil.which('hyperframes')
     vieneu=vieneu_python()
     return {'tools':tools,'python':sys.version.split()[0],'cpu_count':os.cpu_count(),
