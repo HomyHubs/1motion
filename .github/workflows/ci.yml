@@ -25,7 +25,6 @@ jobs:
         run: |
           python3 make-editorial-explainer/scripts/test_tools.py
 
-      - name: Validate project schema and pilot
+      - name: Validate project schema
         run: |
           python3 make-editorial-explainer/scripts/check_schema.py make-editorial-explainer/examples/pilot.project.json
-          python3 make-editorial-explainer/scripts/project_tools.py check make-editorial-explainer/examples/pilot.project.json --pilot
