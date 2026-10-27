@@ -8,9 +8,7 @@ Lưu prompt/art direction, tool versions, output hashes, approval và render log
 ## Timing
 Mỗi beat: WAV duration đo thật + tail có chủ đích. Shot duration cộng bằng beat
 slot. Không để duration_s cũ ghi đè WAV mới. Không trim voice để chữa mismatch.
-Subtitles theo clause/phrase, tối đa 2 dòng, font có tiếng Việt; ASS hoặc engine
-caption. Chia theo ký tự chỉ là rough timing. Muốn karaoke cần alignment riêng,
-kiểm tương thích tiếng Việt/CPU và được phép cài trước. Không tự tải Whisper.
+Subtitles theo clause/phrase, tối đa 2 dòng, font có tiếng Việt; lưu `cues` dạng `{text,start_s,end_s}` trong beat. Mỗi cue phải nằm trọn trong beat slot và được kiểm bằng `project_tools.py check`. Nếu voice có word timestamps, gom từ thành cụm theo dấu câu hoặc khoảng nghỉ, rồi giữ cue phrase-level thay vì chia đều theo ký tự. Chia theo ký tự chỉ là rough timing. Muốn karaoke cần alignment riêng, kiểm tương thích tiếng Việt/CPU và được phép cài trước. Không tự tải Whisper.
 
 ## Voice batch
 `tts_batch.py project --...` khởi tạo model một lần, serial. Nếu file đích đã có
@@ -19,11 +17,7 @@ thì fail thay vì âm thầm dùng lại file voice cũ. Với --only ID, chỉ
 cả thư mục. Không sửa global VieNeu wrapper hay cache.
 
 ## Resume
-Dùng hash từ narration, data, asset, scene code, font và renderer version.
-Đổi source data → invalidate scene/chart tương ứng. Đổi voice → timing/cues và
-shot liên quan. Đổi anchor/style → cảnh dùng anchor. Lưu manifest; existence
-không đủ chứng minh asset hiện hành. Helpers chỉ ghi hash WAV/narration và
-hash assembly inputs; agent chịu trách nhiệm full dependency manifest.
+Dùng hash từ narration, data, asset, scene code, font và renderer version. `build/manifest.json` lưu hash input theo scene và đánh dấu `changed_scene_ids`; chỉ render lại scene có hash đổi. Đổi source data → invalidate scene/chart tương ứng. Đổi voice → timing/cues và shot liên quan. Đổi anchor/style → cảnh dùng anchor. Lưu manifest; existence không đủ chứng minh asset hiện hành. Helpers chỉ ghi hash WAV/narration và hash assembly inputs; agent chịu trách nhiệm full dependency manifest.
 
 ## Assembly helper
 `project_tools.py assemble` dùng beat clip đã render và voice. Reject clip
@@ -32,7 +26,4 @@ trong project), pad/trim ngắn trong sai số cho phép, ghép serial. Không t
 nhạc, subtitle, animation. Clip phải có overlay/caption trước hoặc hậu kỳ riêng.
 Lưu final helper vào final/film.mp4; refuse overwrite nếu file đã có.
 
-Helper mix có VO + silence tail, KHÔNG BGM. Khi có nhạc: xử lý riêng có quyền,
-loop/crossfade/fade và ducking, nghe voice rõ; kiểm toàn track trước giao.
-Không giả sidechaincompress là loudness normalization. Đo loudness không thay
-nghe. Nếu tăng gain kiểm peak/clipping và dynamic range.
+Helper mix có VO + silence tail, KHÔNG BGM. Khi có nhạc: xử lý riêng có quyền, loop/crossfade/fade và ducking, nghe voice rõ; kiểm toàn track trước giao. Dùng two-pass `loudnorm=I=-16:TP=-1:LRA=11`, đo lại bằng `ebur128` và ghi số đo thật vào `REVIEW.md`; nếu chưa chạy ghi `not_checked`. Không giả sidechaincompress là loudness normalization. Đo loudness không thay nghe. Nếu tăng gain kiểm peak/clipping và dynamic range.

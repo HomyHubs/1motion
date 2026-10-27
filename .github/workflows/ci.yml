@@ -10,7 +10,11 @@ on:
 jobs:
   verify:
     name: Test Suite & Schema Verification
-    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-24.04, windows-latest]
+    runs-on: ${{ matrix.os }}
 
     steps:
       - name: Checkout repository
@@ -21,9 +25,14 @@ jobs:
         with:
           python-version: '3.11'
 
-      - name: Run skill regression tests
+      - name: Check ffmpeg availability
+        shell: bash
         run: |
-          python3 make-editorial-explainer/scripts/test_tools.py
+          if command -v ffmpeg >/dev/null 2>&1; then echo "ffmpeg available"; else echo "ffmpeg unavailable; media test will skip"; fi
+      - name: Run skill regression tests
+        shell: bash
+        run: |
+          python make-editorial-explainer/scripts/test_tools.py -v
 
       - name: Validate project schema
         run: |

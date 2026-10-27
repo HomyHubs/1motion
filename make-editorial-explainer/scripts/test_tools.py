@@ -63,6 +63,15 @@ class Helpers(unittest.TestCase):
         self.doc['beats'][0]['events'][0]['target']='fake'
         self.assertTrue(any('Unknown event' in e for e in t.validate(self.doc,self.root)))
 
+    def test_cue_must_fit_beat(self):
+        self.doc['beats'][0]['slot_duration_s'] = 1.0
+        self.doc['beats'][0]['cues'] = [{'text': 'Tiền đến trước', 'start_s': 0.2, 'end_s': 1.1}]
+        self.assertTrue(any('Cue outside beat' in e for e in t.validate(self.doc, self.root)))
+
+    def test_capability_rights_are_required(self):
+        (self.root/'capabilities.json').write_text(json.dumps({'providers':[{'id':'muse-web','available':False}]}), encoding='utf-8')
+        self.assertTrue(any('Capability missing rights_confirmed' in e for e in t.validate(self.doc, self.root)))
+
     def test_event_outside_measured_slot_is_rejected(self):
         self.doc['beats'][0]['slot_duration_s'] = 1.0
         self.doc['beats'][0]['events'][0]['time_s'] = 1.0

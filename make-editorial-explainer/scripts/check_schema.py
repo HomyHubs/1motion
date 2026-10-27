@@ -2,6 +2,7 @@
 """Stdlib checker for keywords used by bundled schema, NOT a full JSON Schema engine.
 For third-party schema compliance use a separately approved Draft 2020-12 validator.
 """
+import argparse
 import json
 from pathlib import Path
 import re
@@ -35,9 +36,26 @@ def check(s,v,path='$'):
         if 'exclusiveMinimum'in s and v<=s['exclusiveMinimum']: errors.append(path+': below exclusive minimum')
     return errors
 
+def strict_check(schema, document):
+    try:
+        import jsonschema
+    except ImportError:
+        return ['--strict requires the jsonschema package']
+    try:
+        jsonschema.Draft202012Validator.check_schema(schema)
+        return [error.message for error in jsonschema.Draft202012Validator(schema).iter_errors(document)]
+    except jsonschema.SchemaError as exc:
+        return ['Invalid schema: '+str(exc)]
+
 if __name__=='__main__':
     root=Path(__file__).resolve().parents[1]
-    doc=Path(sys.argv[1]) if len(sys.argv)>1 else root/'examples/pilot.project.json'
-    errors=check(json.loads((root/'templates/project.schema.json').read_text(encoding='utf-8')),json.loads(doc.read_text(encoding='utf-8')))
-    print(json.dumps({'ok':not errors,'scope':'bundled schema keyword subset; not full metaschema validation','errors':errors},ensure_ascii=False,indent=2))
+    parser=argparse.ArgumentParser()
+    parser.add_argument('document',nargs='?',default=str(root/'examples/pilot.project.json'))
+    parser.add_argument('--strict',action='store_true')
+    args=parser.parse_args()
+    doc_path=Path(args.document)
+    schema=json.loads((root/'templates/project.schema.json').read_text(encoding='utf-8'))
+    document=json.loads(doc_path.read_text(encoding='utf-8'))
+    errors=strict_check(schema,document) if args.strict else check(schema,document)
+    print(json.dumps({'ok':not errors,'scope':'Draft 2020-12 jsonschema' if args.strict else 'bundled schema keyword subset; not full metaschema validation','errors':errors},ensure_ascii=False,indent=2))
     raise SystemExit(bool(errors))

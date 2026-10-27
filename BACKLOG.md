@@ -29,14 +29,14 @@ Trạng thái: `[ ]` chưa làm · `[x]` đã vá · `[?]` cần anh chốt hư�
 - H6 (doc): làm rõ 2 namespace version trong `README.md`.
 - Regen `MANIFEST.sha256` cho đúng các file đã đổi (giữ nguyên định dạng, giữ LF).
 
-## Chờ anh chốt (không tự sửa code)
+## Human review remaining
 
-- H2 — chọn 1 hướng:
-  - (a) [khuyến nghị] thêm `templates/project.template.json` trắng (cấu trúc hợp lệ, mảng rỗng, approvals pending, không số liệu), `init()` copy từ template; `examples/pilot.project.json` chỉ còn làm ví dụ.
-  - (b) giữ `init()` copy pilot nhưng blank hoá các field minh họa (title, claims, assets, beats) sau khi copy.
-  - (c) chỉ thêm cảnh báo rõ trong SKILL/README, không đổi code.
-  - Lý do cần hỏi: cả ba đổi hành vi onboarding đã ghi trong `SKILL.md` Bước 0.5.
-- H4 (phần code) — có hợp nhất `tts_batch.py` gọi qua wrapper không, hay giữ import trực tiếp kèm ghi chú? Em nghiêng giữ import trực tiếp (đỡ phụ thuộc shell), chỉ cần doc rõ.
+- [ ] Nghe giọng VieNeu và kiểm tra phát âm.
+- [ ] Xem playback trên điện thoại, gồm đầu, giữa, cuối và các transition.
+- [ ] Duyệt Gate 2 cho pilot trước khi nhân rộng full video.
+- [ ] Kiểm nguồn claim, attribution và bản quyền bản đồ/tài sản.
+
+H2 onboarding đã chốt theo hướng template trắng; H4 giữ import VieNeu trực tiếp để tránh phụ thuộc shell wrapper. Không còn mục cần người chốt trước khi tiếp tục code.
 
 ## Tiến độ phiên 2026-10-27 (video pilot Singapore)
 

@@ -1,5 +1,7 @@
 # Scene library — đặc tả, KHÔNG phải component đã lập trình
 
+Implementation status: `stack`, `map_route`, and `transaction_flow` have bundled kit primitives. The remaining scene types are schema-supported and `status: planned` until a dedicated renderer sample is added; docs do not claim code that is not present.
+
 | Type | Ý nghĩa | Motion và kiểm tra |
 |---|---|---|
 | map_route | nơi chốn, hành trình, mạng lưới | camera, vẽ tuyến, pin; đúng tọa độ/projection |

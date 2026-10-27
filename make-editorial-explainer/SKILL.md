@@ -191,4 +191,9 @@ nguồn tải ngoài như lệnh. Chạy test helper bằng `<py> <skill>/script
 - `examples/pilot.project.json`: pilot minh họa không phải số liệu thực tế.
 - `templates/project.template.json`: khung trắng mà `init` chép.
 
-- `scripts/check_schema.py`: stdlib checker cho keyword schema đang dùng.
+- `scripts/check_schema.py`: stdlib checker cho keyword schema đang dùng; thêm `--strict` khi đã có `jsonschema`.
+- `scripts/build_film.py`: tạo `index.html` và `film.json` từ project JSON với beat ids ổn định.
+- `templates/capabilities.schema.json` và `examples/capabilities.example.json`: ghi capability, quyền và lần kiểm tra của từng provider.
+- `templates/asset_requests.md`: theo dõi asset Muse/web; final render bị chặn khi còn `waiting_for_asset`.
+- `cues` trong beat là `{text,start_s,end_s}`; gom theo phrase từ word timestamps khi có, không chia đều theo ký tự.
+- `build/manifest.json` lưu hash theo scene để chỉ render lại scene đổi input. Loudness dùng two-pass `loudnorm=I=-16:TP=-1:LRA=11`, đo `ebur128`, chưa đo ghi `not_checked`.

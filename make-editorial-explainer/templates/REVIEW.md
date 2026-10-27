@@ -15,10 +15,10 @@
 | Motion playback | not_checked | |
 | Voice listened / pronunciation | not_checked | |
 | Caption sync | not_checked | |
-| Audio mix / clipping | not_checked | |
+| Audio mix / clipping | not_checked | Two-pass loudnorm target `I=-16:TP=-1:LRA=11`; ebur128 measurement not_checked until run on final output. |
 | Full decode / format / duration | not_checked | |
 | CPU/RAM benchmark | not_checked | |
-| Resume changed-scene test | not_checked | |
+| Resume changed-scene test | not_checked | `build/manifest.json` records per-scene input hashes; run the one-scene mutation test before release. |
 
 ## Changes required
 ## Human review still needed

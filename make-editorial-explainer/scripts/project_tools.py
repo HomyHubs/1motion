@@ -117,8 +117,31 @@ def validate(doc, root, assets=False, final=False, pilot=False):
         except ValueError as e: errors.append(str(e))
         if a.get('status') not in ['ready','waiting','placeholder']: errors.append('Invalid asset status: '+a['id'])
         if final and (a.get('status')!='ready' or not a.get('rights_note','').strip()): errors.append('Asset not cleared: '+a['id'])
+    capabilities = Path(root) / 'capabilities.json'
+    if capabilities.is_file():
+        try:
+            cap_doc = json.loads(capabilities.read_text(encoding='utf-8'))
+            for provider in cap_doc.get('providers', []):
+                for field in ('available', 'rights_confirmed', 'last_checked'):
+                    if field not in provider:
+                        errors.append('Capability missing '+field+': '+str(provider.get('id', '<unknown>')))
+        except (OSError, json.JSONDecodeError) as exc:
+            errors.append('Invalid capabilities.json: '+str(exc))
+    requests = Path(root) / 'asset_requests.md'
+    if final and requests.is_file():
+        for line in requests.read_text(encoding='utf-8').splitlines():
+            cells = [cell.strip() for cell in line.strip('|').split('|')]
+            if len(cells) >= 4 and cells[0] not in ('id', '---') and cells[3] == 'waiting_for_asset':
+                errors.append('Asset request still waiting: '+cells[0])
     for b in sets.get('beats',{}).values():
         bid=b['id']
+        for cue in b.get('cues', []):
+            if not isinstance(cue, dict) or not isinstance(cue.get('text'), str) or not cue['text'].strip():
+                errors.append('Invalid cue text: '+bid)
+            elif type(cue.get('start_s')) not in [int, float] or type(cue.get('end_s')) not in [int, float] or cue['start_s'] < 0 or cue['end_s'] <= cue['start_s']:
+                errors.append('Invalid cue timing: '+bid)
+            elif 'slot_duration_s' in b and cue['end_s'] > b['slot_duration_s']:
+                errors.append('Cue outside beat: '+bid)
         if not re.fullmatch(r'[A-Za-z0-9_-]+',bid): errors.append('Unsafe beat id: '+bid)
         for key in ['narration','purpose']:
             if not isinstance(b.get(key),str) or not b[key].strip(): errors.append('Missing '+key+': '+bid)
@@ -173,6 +196,20 @@ def measure(root):
     save(root/'project.json',doc)
     return doc
 
+def scene_manifest(root, doc):
+    kit = ROOT / 'templates' / 'hf-kit'
+    kit_hash = textsha(''.join(sha(p) for p in sorted(kit.glob('*')) if p.is_file()))
+    rows = []
+    for beat in doc['beats']:
+        assets = []
+        for asset_id in beat.get('asset_ids', []):
+            asset = next(item for item in doc['assets'] if item['id'] == asset_id)
+            asset_path = inside(root, asset['path'])
+            assets.append({'id': asset_id, 'sha256': sha(asset_path) if asset_path.is_file() else 'missing'})
+        input_hash = textsha(json.dumps({'id': beat['id'], 'narration': beat['narration'], 'scene_type': beat['scene_type'], 'layers': beat.get('layers', []), 'events': beat.get('events', []), 'assets': assets, 'kit': kit_hash}, ensure_ascii=False, sort_keys=True))
+        rows.append({'id': beat['id'], 'input_sha256': input_hash, 'assets': assets})
+    return {'kit_sha256': kit_hash, 'scenes': rows}
+
 def assemble(root,pilot=False):
     root=Path(root).resolve();doc=load(root);require(doc,root,assets=True,final=True,pilot=pilot)
     fmt=doc['format'];fps=fmt['fps'];outdir=root/'final';outdir.mkdir(exist_ok=True)
@@ -216,6 +253,18 @@ def assemble(root,pilot=False):
     manifest={'scope':'basic local VO-only assembly; not visual/evidence/listening approval','pilot':bool(pilot),'unverified_claims':unverified,
               'measured_duration_s':dur,'expected_duration_s':expected,'file':str(output.relative_to(root)),
               'sha256':sha(output),'inputs':[{'id':b['id'],'clip_sha256':sha(c),'audio_sha256':sha(w),'slot_s':d} for b,c,w,d in inputs]}
+    builddir = root / 'build'; builddir.mkdir(exist_ok=True)
+    previous = {}
+    manifest_path = builddir / 'manifest.json'
+    if manifest_path.is_file():
+        previous = {row['id']: row['input_sha256'] for row in json.loads(manifest_path.read_text(encoding='utf-8')).get('scenes', [])}
+    current = scene_manifest(root, doc)
+    for row in current['scenes']:
+        row['changed'] = previous.get(row['id']) != row['input_sha256']
+    save(manifest_path, current)
+    manifest['scene_manifest'] = str(manifest_path.relative_to(root))
+    manifest['changed_scene_ids'] = [row['id'] for row in current['scenes'] if row['changed']]
+    manifest['loudness'] = {'target_i_lufs': -16, 'true_peak_db': -1, 'lra': 11, 'status': 'not_checked', 'measurement': 'run ebur128 on the rendered output'}
     save(outdir/'assembly_manifest.json',manifest)
     return manifest
 

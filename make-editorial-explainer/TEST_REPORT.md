@@ -1,10 +1,7 @@
 # Test report — v1.0.0
 
 ## Executed in packaging sandbox, NOT the user's Muse VM
-- 8 Python unittest cases: PASS. Includes synthetic audio measurement, synthetic
-  video assembly + full decode, stale voice/hash rejection, short clip rejection,
-  duplicate/unknown IDs, motion targets, traversal/symlink escape checks,
-  final gates/missing assets and init overwrite refusal.
+- 16 Python unittest cases: 15 PASS, 1 SKIP. Includes synthetic audio measurement, synthetic video assembly + full decode, stale voice/hash rejection, short clip rejection, duplicate/unknown IDs, motion targets, phrase-cue beat bounds, provider rights fields, traversal/symlink escape checks, final gates/missing assets and init overwrite refusal.
 - Example passes stdlib checker for all keywords used by bundled schema.
   Negative case missing narration is rejected. This is NOT full Draft 2020-12
   metaschema validation; jsonschema is not installed, and no package was installed.
@@ -22,7 +19,9 @@
 - `--pilot` (check and assemble): claims still `pending` pass the final gate; the assembly manifest records `pilot` and `unverified_claims`. Without `--pilot` a pending used claim still blocks. New test `test_pilot_lets_pending_claims_through`; the assemble test now covers both paths. Reason: a remake of a reference video keeps its claims `pending` (story-and-evidence.md), and `assemble` always ran the final gate.
 - `assemble()` writes the ffmpeg concat list as UTF-8. The assemble test runs with an ASCII temp path, so a non-ASCII path is unverified.
 - SKILL.md is 1.1.0: `<py>` placeholder, `project_tools.py voice` for synthesis, reference-video line in Bước 1. No Hermes load proof yet (see below).
-- `check_schema.py` reads UTF-8 explicitly and reports an unsupported schema type instead of raising KeyError.
+- `check_schema.py` reads UTF-8 explicitly, reports an unsupported schema type instead of raising KeyError, and exposes optional `--strict` Draft 2020-12 validation. Standard validation passed; strict validation is `not_checked` because `jsonschema` is not installed and no dependency was installed.
+- `build_film.py examples/pilot.project.json --out <temporary>` produced an HTML composition containing scene ids `01` and `02`; the temporary output was removed after verification.
+- `project_tools.py` now records per-scene input hashes in `build/manifest.json` and stores loudness target metadata as `not_checked` until a real final output is measured with `ebur128`.
 
 ## Not executed / not claimed
 - Hermes skill discovery on the user's install.

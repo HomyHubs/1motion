@@ -14,5 +14,6 @@
   "sources": [],
   "claims": [],
   "assets": [],
-  "beats": []
+  "beats": [],
+  "cues_note": "Add phrase cues after voice alignment: [{text,start_s,end_s}]."
 }
