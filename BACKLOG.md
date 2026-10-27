@@ -42,7 +42,10 @@ Trạng thái: `[ ]` chưa làm · `[x]` đã vá · `[?]` cần anh chốt hư�
 
 - [x] Kit dựng cảnh: `make-editorial-explainer/templates/hf-kit/kit.css` + `kit.js` (chưa có tài liệu `references/hf-kit.md`, chưa nối vào SKILL).
 - [x] ffmpeg, ffprobe, Python 3.13 chạy được qua công cụ máy (allowlist đã mở).
-- [ ] HyperFrames CLI: chỉ có dạng `.CMD` trên PATH nên không chạy được từ công cụ hiện tại. Cần: đường dẫn `node.exe` + entry JS của hyperframes, hoặc quyền `npx` có chủ đích. Chặn `check` và `render` pilot.
+- [x] HyperFrames 0.8.204 chạy qua `npx` (anh đã cho phép). `check`: 0 lỗi, 7 cảnh báo (đọc chữ chưa đủ thời gian ở 6 chỗ, chưa có nhạc/âm thanh nền). `render`: xong, 3472 khung.
+- [x] Voice VieNeu: 12 beat, tổng 115.23 s (beat 05 tạo thêm trong phiên này). Đã muxed vào `final/pilot-voice.mp4` (720x1280, ~114.9 s, có audio). Chưa nghe bằng tai, chưa kiểm phát âm.
+- [ ] Mở rộng: sửa thời gian đọc chữ ở 6 cảnh báo, nối gọn caption, kiểm khung giữa cảnh bằng snapshot.
+- [ ] Commit kết quả: `work/maker/singapore-remake/` đang untracked (chưa commit, có file MP4 lớn).
 - [ ] VieNeu voice: chưa chạy (cần kiểm cache model offline trước).
 - [ ] Bản đồ Malacca: `work/hands/geodata/malacca_land.json` có sẵn (Natural Earth, public domain).
 - [ ] Pilot Singapore 720x1280 chưa render. Kết quả đúng là pilot, claim còn `pending`, không gọi là final.
