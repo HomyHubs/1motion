@@ -5,6 +5,14 @@ All notable changes to the `make-editorial-explainer` skill will be documented i
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+### Added
+- HyperFrames kit contract covering scene data, capability-gated media inputs, deterministic timelines, and a concrete beauty bar for editorial explainer pilots.
+
+### Changed
+- **`make-editorial-explainer`**: sharpened Muse/Gemini media gating, asset handoff requirements, focal-point discipline, playback-based motion review, and runtime diagnostics; bumped the skill to `1.2.0` while keeping project schema `1.0`.
+
 ## [1.1.0] - 2026-10-27
 
 ### Added

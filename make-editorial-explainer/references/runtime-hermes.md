@@ -16,7 +16,7 @@
 Mẫu ở `examples/runtime.env.example`. Đường dẫn máy cụ thể không viết vào tài liệu của gói. ASSUMPTION: Hermes nạp `<hermes home>/.env` vào terminal; xác minh khi chạy.
 
 ## Cấu hình người dùng cung cấp — phải xác minh lại khi chạy
-- Muse chat web: nhận prompt và trả file. Chưa xác minh bridge với Hermes.
+- Muse chat web: nhận prompt và trả file. Chưa xác minh bridge với Hermes. Ghi media capability theo từng provider trong `capabilities.json`; không suy ra quyền tạo ảnh/video từ chat model, 9router hoặc gói Pro.
 - Hermes dùng Gemini qua 9router. Chưa xác minh media endpoint hay browser control.
 - VieNeu-TTS v3 Turbo ONNX/CPU, thư viện báo là vieneu 3.8.3. Cache model khoảng 540 MB theo log người dùng, không bảo đảm cache còn đủ.
 

@@ -31,6 +31,8 @@ class Helpers(unittest.TestCase):
             report=t.doctor()
         self.assertEqual((report['vieneu_python'],report['vieneu_python_exists'],report['vieneu_voice'],report['tools']['hyperframes']),(str(fake),True,'v1','hf-cmd'))
         self.assertEqual(report['tools']['python'],sys.executable)
+        self.assertIn(report['os'], ('nt', 'posix'))
+        self.assertGreater(report['disk_free_gb'], 0)
     def test_voice_requires_vieneu_interpreter(self):
         with mock.patch.dict(os.environ,{'VIENEU_PYTHON':str(self.root/'missing-python')}):
             with self.assertRaisesRegex(ValueError,'VieNeu interpreter not found'): t.voice(self.root,[])
@@ -60,6 +62,11 @@ class Helpers(unittest.TestCase):
     def test_invalid_motion(self):
         self.doc['beats'][0]['events'][0]['target']='fake'
         self.assertTrue(any('Unknown event' in e for e in t.validate(self.doc,self.root)))
+
+    def test_event_outside_measured_slot_is_rejected(self):
+        self.doc['beats'][0]['slot_duration_s'] = 1.0
+        self.doc['beats'][0]['events'][0]['time_s'] = 1.0
+        self.assertTrue(any('Event outside slot' in e for e in t.validate(self.doc,self.root)))
     @unittest.skipUnless(shutil.which('ffmpeg') and shutil.which('ffprobe'),'FFmpeg required')
     def test_measure_assemble_and_stale(self):
         # Tiny test format deliberately not the user's production format.

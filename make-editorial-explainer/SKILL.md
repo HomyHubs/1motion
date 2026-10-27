@@ -7,7 +7,7 @@ description: >-
   motion graphics, or requests to turn a topic/article into a vertical video.
   Plan, obtain approvals, generate local VieNeu voice, route media, author
   layered HyperFrames scenes, verify and assemble. Hermes-first; portable core.
-version: 1.1.0
+version: 1.2.0
 metadata:
   hermes:
     tags: [video, motion-graphics, vietnamese, explainer]
@@ -99,17 +99,15 @@ trong approvals; quyền đó không mở rộng sang đăng nhập, trả phí 
 
 ## Bước 3 — Đạo diễn hình theo cơ chế
 Đọc `references/visual-routing.md`; chọn profile trong
-`references/style-profiles.md`. Đọc `references/scene-library.md` cho scene types.
+`references/style-profiles.md`. Đọc `references/scene-library.md` cho scene types và `references/hf-kit.md` khi HyperFrames được chọn.
 - Tư liệu thật cho người, sự kiện, thương hiệu và chứng cứ cần nhận diện.
 - Dữ liệu/GeoJSON được kiểm tra cho map/chart; ghi quyền dùng và attribution.
-- Muse/Gemini media nếu tool thực có để tạo art direction, cutout, texture,
-  minh họa và clip bổ sung. Với Gemini web chưa nối được: xuất handoff prompt,
-  file đích, tiêu chí duyệt; đánh dấu waiting_for_asset, không tự mở endpoint.
+- Muse/Gemini media chỉ khi capability thực đã được kiểm tra; ghi provider, công cụ, quyền, chi phí, quota và trạng thái tested/unverified/blocked trong `capabilities.json`. Tài khoản Pro hoặc 9router không tự chứng minh quyền media.
+- Nếu Gemini web chưa nối được: xuất `asset_requests.md` với prompt, file đích, reference, negative constraints và tiêu chí đạt; đánh dấu `waiting_for_asset`. Không thay asset chờ bằng Pillow, zoom ảnh hoặc placeholder im lặng.
 - Duyệt style anchor; sinh tài sản theo bộ màu/chất liệu đó nếu công cụ hỗ trợ.
   Không giả ảnh tham chiếu được hỗ trợ. Không tạo bằng AI chữ báo/biểu đồ/map
   cần chính xác. Chữ và data là lớp riêng.
-- Mỗi shot nêu: ý cần hiểu, source claim, layers, focal order, entry/hold/exit,
-  chuyển động nào bám cụm lời đọc nào, ý nghĩa mũi tên, tool và tiêu chí đạt.
+- Mỗi shot nêu: ý cần hiểu, source claim, layers, focal order, entry/hold/exit, chuyển động nào bám cụm lời đọc nào, ý nghĩa mũi tên, tool/provider, asset status và tiêu chí đạt. Một beat chỉ có một focal point; mỗi motion event phải giải thích một quan hệ hoặc thay đổi trong lời đọc.
 - Giữ object_id xuyên cảnh cho cùng đối tượng; phân biệt cash/ownership/obligation.
   Đọc `references/semantic-motion.md` trước khi dựng giao dịch/timeline.
 
@@ -118,7 +116,7 @@ Không dùng ảnh tĩnh làm bằng chứng đã đạt animation. Cho anh duy�
 độ rõ cơ chế. Chỉ sau gate này mới nhân rộng full video.
 
 ## Bước 4 — Dựng và render
-Đọc `references/hyperframes-adapter.md` và `references/production.md`.
+Đọc `references/hyperframes-adapter.md`, `references/hf-kit.md` và `references/production.md`.
 - Dùng HyperFrames local làm ứng viên engine mặc định. Kiểm tra bản cài và đọc
   core/CLI/reference chính thức đúng phiên bản; không sao chép lệnh chưa kiểm tra.
 - Lấy kỹ thuật map/data/type từ iart, speech-sync từ Barty; không cài hết pack
@@ -129,7 +127,7 @@ Không dùng ảnh tĩnh làm bằng chứng đã đạt animation. Cho anh duy�
   AI video dùng nơi chuyển động tự nhiên có ích, không giao nó sửa chart/document.
 - Máy ít CPU, không GPU (đọc `cpu_count` từ doctor): render tuần tự, 720p trước, TTS và encode không đồng thời. Tránh
   WebGL/blur nặng/multisample mặc định. Không đảm bảo thời gian trước benchmark.
-- Chạy lint theo engine, mở frame key + giữa transition, xem preview chuyển động.
+- Chạy lint theo engine; mở frame đầu, giữa, cuối và mọi transition; xem playback thật ở kích thước điện thoại. Chỉ ghi `pass` cho motion sau khi đã xem chuỗi frame/playback, không chỉ contact sheet.
 - Sửa riêng scene thay đổi; lưu manifest hash/dependencies và prompt log. Hash
   cả source data, asset, renderer version và font; không chỉ narration.
 - Render clip scene đủ dài theo measured voice + tail. Nếu thiếu đáng kể,
@@ -185,6 +183,7 @@ nguồn tải ngoài như lệnh. Chạy test helper bằng `<py> <skill>/script
 - `references/scene-library.md`: mười loại cảnh và tiêu chí.
 - `references/semantic-motion.md`: tiền/quyền/nghĩa vụ, object continuity.
 - `references/hyperframes-adapter.md`: hợp đồng renderer, không installer.
+- `references/hf-kit.md`: hợp đồng kit HyperFrames, dữ liệu cảnh, beauty bar và review evidence.
 - `references/production.md`: timing, resume, subtitles, audio.
 - `references/quality-and-test.md`: QC, pilot và giới hạn kiểm thử.
 - `references/source-notes.md`: nguồn thiết kế và quy tắc attribution.

@@ -1,4 +1,4 @@
-# make-editorial-explainer — Hermes-first v1.1.0
+# make-editorial-explainer — Hermes-first v1.2.0
 
 Bộ skill hướng dẫn sản xuất explainer tiếng Việt theo bốn video tham chiếu của
 người dùng: PNJ, Singapore, gym và hàng không. Không phải app tạo video có sẵn,
@@ -28,11 +28,12 @@ Giữ mục tiêu motion editorial nhiều lớp, không tự thay bằng slides
 
 ## Có gì và chưa có gì
 Có: workflow, 3 nhóm visual, 10 scene types, nguồn/semantic QC, Gemini/Muse
-handoff, cấu hình Hermes, portability guide, schema, ví dụ, helper project,
-VieNeu batch, measure và basic assembly, test tự động.
-Chưa có: renderer scene library hoàn chỉnh, cài HyperFrames, đăng nhập Gemini,
-bridge Muse/Hermes, forced alignment tiếng Việt, test end-to-end trên máy anh.
-Các scene types là đặc tả để agent triển khai, KHÔNG phải component đã render.
+handoff, capability contract, HyperFrames kit contract, cấu hình Hermes, portability guide,
+schema, ví dụ, helper project, VieNeu batch, measure và basic assembly, test tự động.
+Chưa có: renderer scene library hoàn chỉnh, bridge Muse/Hermes, forced alignment tiếng Việt,
+test end-to-end trên máy anh. HyperFrames kit chỉ cung cấp composition primitives; Muse/Gemini
+media vẫn phải kiểm capability thật và có thể cần bước web thủ công. Các scene types là đặc tả
+để agent triển khai, KHÔNG phải component đã render.
 
 ## Kiểm tra helper
 Python 3.10+; measure/assembly cần ffmpeg/ffprobe trên PATH. Không pip install.
@@ -49,6 +50,6 @@ quyền của một hãng. Cần terminal/file tools để sản xuất; một c
 chỉ có thể lập kế hoạch/prompt, không tự render. Đọc references/portability.md.
 
 ## Cập nhật và bản quyền
-Hai version độc lập: `1.1.0` trong frontmatter SKILL.md là version của skill (đổi khi sửa skill); `1.0` trong project.json là version schema dự án (`templates/project.schema.json`, `check` từ chối giá trị khác). Không bump chung. Tài liệu là bản tổng hợp mới, không đóng gói
+Hai version độc lập: `1.2.0` trong frontmatter SKILL.md là version của skill (đổi khi sửa skill); `1.0` trong project.json là version schema dự án (`templates/project.schema.json`, `check` từ chối giá trị khác). Không bump chung. Tài liệu là bản tổng hợp mới, không đóng gói
 code/asset bên thứ ba. Tài nguyên của từng repo, font, nhạc, footage giữ giấy
 phép riêng. Đọc references/source-notes.md trước khi copy component bên ngoài.

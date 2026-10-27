@@ -145,8 +145,9 @@ def validate(doc, root, assets=False, final=False, pilot=False):
                 if not isinstance(e,dict) or any(not e.get(k) for k in ['target','trigger_phrase','action','meaning']): errors.append('Invalid motion event: '+bid); continue
                 if e['target'] not in layerids: errors.append('Unknown event target: '+bid)
                 if e['trigger_phrase'] not in b.get('narration',''): errors.append('Trigger not in narration: '+bid)
-                if 'time_s' in e and (type(e['time_s']) not in [int,float] or not math.isfinite(e['time_s']) or e['time_s']<0): errors.append('Invalid event time: '+bid)
-                elif 'time_s' in e and 'slot_duration_s' in b and e['time_s']>=b['slot_duration_s']: errors.append('Event outside slot: '+bid)
+                if 'time_s' in e:
+                    if type(e['time_s']) not in [int,float] or not math.isfinite(e['time_s']) or e['time_s']<0: errors.append('Invalid event time: '+bid)
+                    elif 'slot_duration_s' in b and e['time_s']>=b['slot_duration_s']: errors.append('Event outside slot: '+bid)
         for key in ['audio_path','clip_path']:
             try:
                 p=inside(root,b.get(key))
@@ -242,7 +243,8 @@ def doctor():
     tools['python']=sys.executable
     tools['hyperframes']=os.environ.get('HYPERFRAMES_CMD') or shutil.which('hyperframes')
     vieneu=vieneu_python()
-    return {'tools':tools,'python':sys.version.split()[0],'cpu_count':os.cpu_count(),
+    disk_free_gb=shutil.disk_usage(Path.cwd()).free / (1024 ** 3)
+    return {'tools':tools,'python':sys.version.split()[0],'os':os.name,'cpu_count':os.cpu_count(),'disk_free_gb':round(disk_free_gb,2),
             'vieneu_python':str(vieneu),'vieneu_python_exists':vieneu.is_file(),
             'vieneu_voice':os.environ.get('VIENEU_VOICE'),
             'notice':'Paths only. No installation, network, model import, media endpoint or benchmark performed.'}
