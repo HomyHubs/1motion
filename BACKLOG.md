@@ -37,3 +37,13 @@ Trạng thái: `[ ]` chưa làm · `[x]` đã vá · `[?]` cần anh chốt hư�
   - (c) chỉ thêm cảnh báo rõ trong SKILL/README, không đổi code.
   - Lý do cần hỏi: cả ba đổi hành vi onboarding đã ghi trong `SKILL.md` Bước 0.5.
 - H4 (phần code) — có hợp nhất `tts_batch.py` gọi qua wrapper không, hay giữ import trực tiếp kèm ghi chú? Em nghiêng giữ import trực tiếp (đỡ phụ thuộc shell), chỉ cần doc rõ.
+
+## Tiến độ phiên 2026-10-27 (video pilot Singapore)
+
+- [x] Kit dựng cảnh: `make-editorial-explainer/templates/hf-kit/kit.css` + `kit.js` (chưa có tài liệu `references/hf-kit.md`, chưa nối vào SKILL).
+- [x] ffmpeg, ffprobe, Python 3.13 chạy được qua công cụ máy (allowlist đã mở).
+- [ ] HyperFrames CLI: chỉ có dạng `.CMD` trên PATH nên không chạy được từ công cụ hiện tại. Cần: đường dẫn `node.exe` + entry JS của hyperframes, hoặc quyền `npx` có chủ đích. Chặn `check` và `render` pilot.
+- [ ] VieNeu voice: chưa chạy (cần kiểm cache model offline trước).
+- [ ] Bản đồ Malacca: `work/hands/geodata/malacca_land.json` có sẵn (Natural Earth, public domain).
+- [ ] Pilot Singapore 720x1280 chưa render. Kết quả đúng là pilot, claim còn `pending`, không gọi là final.
+- [ ] Chưa sửa SKILL.md, MANIFEST, CHANGELOG cho hf-kit.
