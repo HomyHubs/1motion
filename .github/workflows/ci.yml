@@ -1,0 +1,31 @@
+name: CI & Quality Gate
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  verify:
+    name: Test Suite & Schema Verification
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Run skill regression tests
+        run: |
+          python3 make-editorial-explainer/scripts/test_tools.py
+
+      - name: Validate project schemas and examples
+        run: |
+          python3 make-editorial-explainer/scripts/schema_check.py make-editorial-explainer/examples/pilot.project.json
+          python3 make-editorial-explainer/scripts/project_tools.py --schema make-editorial-explainer/examples/pilot.project.json
