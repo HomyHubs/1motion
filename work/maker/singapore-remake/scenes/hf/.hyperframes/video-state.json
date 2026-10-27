@@ -1,0 +1,125 @@
+{
+  "version": 1,
+  "historyId": "00ce463c-7613-4012-ba83-1db3df7049cc",
+  "currentRevision": "b0650068-b14b-441c-ae4e-ce2e6826a2da",
+  "pendingChanges": false,
+  "files": {
+    "assets/gsap.min.js": {
+      "hash": "92bb9a96476f983d212a2bc4f54c889039c1696dd4461d40a736860938570fbb",
+      "content": "C:\\Users\\TIMKEM\\.cache\\hyperframes\\history\\00ce463c-7613-4012-ba83-1db3df7049cc\\blobs\\92\\92bb9a96476f983d212a2bc4f54c889039c1696dd4461d40a736860938570fbb"
+    },
+    "hyperframes.json": {
+      "hash": "53dbce1e19aa713cbb12ee0bc4d206143b45ab15e6ffbfcaa8f69572d4d24d50",
+      "content": "C:\\Users\\TIMKEM\\.cache\\hyperframes\\history\\00ce463c-7613-4012-ba83-1db3df7049cc\\blobs\\53\\53dbce1e19aa713cbb12ee0bc4d206143b45ab15e6ffbfcaa8f69572d4d24d50"
+    },
+    "index.html": {
+      "hash": "001a26af3b9595122330bcd394ccc61a6b20671e0db734f0e9f7529cc29afcbd",
+      "content": "C:\\Users\\TIMKEM\\.cache\\hyperframes\\history\\00ce463c-7613-4012-ba83-1db3df7049cc\\blobs\\00\\001a26af3b9595122330bcd394ccc61a6b20671e0db734f0e9f7529cc29afcbd"
+    },
+    "meta.json": {
+      "hash": "a80a862c1ba5f1b446e3f06ad33d01fca3987b1388c17c928f2ed770b5791be3",
+      "content": "C:\\Users\\TIMKEM\\.cache\\hyperframes\\history\\00ce463c-7613-4012-ba83-1db3df7049cc\\blobs\\a8\\a80a862c1ba5f1b446e3f06ad33d01fca3987b1388c17c928f2ed770b5791be3"
+    }
+  },
+  "revisions": {
+    "b0650068-b14b-441c-ae4e-ce2e6826a2da": {
+      "actor": {
+        "kind": "outside",
+        "name": "Outside"
+      },
+      "label": "Changed outside the app",
+      "startedAt": 1793085776905,
+      "endedAt": 1793085776927,
+      "files": {
+        "index.html": {
+          "before": "C:\\Users\\TIMKEM\\.cache\\hyperframes\\history\\00ce463c-7613-4012-ba83-1db3df7049cc\\blobs\\76\\76d61ee7d4810a9ae209a45f988aa700c992809c1bbc52e9b3e62a12cd39743e",
+          "after": "C:\\Users\\TIMKEM\\.cache\\hyperframes\\history\\00ce463c-7613-4012-ba83-1db3df7049cc\\blobs\\00\\001a26af3b9595122330bcd394ccc61a6b20671e0db734f0e9f7529cc29afcbd"
+        }
+      }
+    }
+  },
+  "checks": {
+    "latest": {
+      "revision": "b0650068-b14b-441c-ae4e-ce2e6826a2da",
+      "id": "69b7db75-7b09-4f61-9dad-730292bc2001"
+    },
+    "revisions": {
+      "b0650068-b14b-441c-ae4e-ce2e6826a2da": [
+        {
+          "id": "69b7db75-7b09-4f61-9dad-730292bc2001",
+          "scope": "project",
+          "report": "F:\\2.sources\\e.hermes0skill\\1motion\\work\\maker\\singapore-remake\\scenes\\hf\\.hyperframes\\artifacts\\checks\\69b7db75-7b09-4f61-9dad-730292bc2001.json",
+          "metadata": {
+            "ok": false,
+            "browserSkipped": false,
+            "options": {
+              "samples": 9,
+              "atTransitions": false,
+              "maxIssues": 80,
+              "collapseStatic": true,
+              "tolerance": 2,
+              "timeout": 3000,
+              "contrast": true,
+              "strict": false,
+              "snapshots": false,
+              "browserGpuMode": "auto"
+            }
+          },
+          "createdAt": 1793085792439,
+          "contentHash": "ab8e5d9a2c55dbf39d78a40efc724b5fd0a78cd2068731cf3df6e017f6f03cad",
+          "revision": "b0650068-b14b-441c-ae4e-ce2e6826a2da",
+          "inputFingerprint": "4649b2d11531ec68c168d75259647db393c9d10fd827eef9e7cc6f5f0a65ffd3",
+          "inputScope": "local-project-files",
+          "attribution": "recorded-revision"
+        }
+      ]
+    },
+    "unversioned": [
+      {
+        "id": "da3beb3f-139b-417b-8273-3489b6655254",
+        "scope": "project",
+        "report": "F:\\2.sources\\e.hermes0skill\\1motion\\work\\maker\\singapore-remake\\scenes\\hf\\.hyperframes\\artifacts\\checks\\da3beb3f-139b-417b-8273-3489b6655254.json",
+        "metadata": {
+          "ok": false,
+          "browserSkipped": false,
+          "options": {
+            "samples": 9,
+            "atTransitions": false,
+            "maxIssues": 80,
+            "collapseStatic": true,
+            "tolerance": 2,
+            "timeout": 3000,
+            "contrast": true,
+            "strict": false,
+            "snapshots": false,
+            "browserGpuMode": "auto"
+          }
+        },
+        "createdAt": 1793036170837,
+        "contentHash": "d9f6aa21cea874202ed32c2e706f403410269f054968355fcd69ba2cb3270e65",
+        "revision": null,
+        "inputFingerprint": "9bab2d20d690811e5c6f528d6b65dbaec5c0a246a5ab3cd2dff65ddd8f0b562e",
+        "inputScope": "local-project-files",
+        "attribution": "unversioned"
+      }
+    ]
+  },
+  "snapshots": {
+    "latest": null,
+    "revisions": {},
+    "unversioned": []
+  },
+  "renders": {
+    "latest": {
+      "id": "e25a9259-68d2-4b1a-9f64-bff6ac032831",
+      "completedAt": 1793085905259,
+      "output": "F:\\2.sources\\e.hermes0skill\\1motion\\work\\maker\\singapore-remake\\scenes\\hf\\pilot-silent.mp4",
+      "status": "completed",
+      "revision": "b0650068-b14b-441c-ae4e-ce2e6826a2da"
+    },
+    "retainedRevisions": [
+      "b0650068-b14b-441c-ae4e-ce2e6826a2da"
+    ]
+  },
+  "pendingArtifactCleanup": []
+}

@@ -1,0 +1,744 @@
+{
+  "version": "1.0",
+  "title": "Vì sao Singapore giàu: dựng lại từ video tham chiếu singapore.mp4",
+  "mode": "full",
+  "format": {
+    "width": 720,
+    "height": 1280,
+    "fps": 30
+  },
+  "approvals": {
+    "story": "approved",
+    "pilot": "approved"
+  },
+  "sources": [
+    {
+      "id": "ref-video",
+      "title": "Video tham chiếu: video-reference/singapore.mp4 (118.5 s), phiên âm ASR large-v3-turbo của hands (work/hands/ref/singapore_transcript.txt)",
+      "rights_note": "Chỉ dùng lời và cấu trúc làm kịch bản mẫu. Không dùng lại footage, nhạc, đồ họa hay frame của video mẫu."
+    }
+  ],
+  "claims": [
+    {
+      "id": "c1",
+      "type": "attributed",
+      "status": "pending",
+      "source_ids": [
+        "ref-video"
+      ],
+      "text": "Video tham chiếu nói rằng Singapore nhỏ hơn Sài Gòn, không giàu tài nguyên, nước uống phải mua của láng giềng (đoạn 0.12-6.00 s, phiên âm ASR). Sự thật bên dưới chưa được đối chiếu nguồn khác."
+    },
+    {
+      "id": "c2",
+      "type": "attributed",
+      "status": "pending",
+      "source_ids": [
+        "ref-video"
+      ],
+      "text": "Video tham chiếu nói rằng người dân Singapore giàu ngang người Mỹ (đoạn 6.66-9.72 s, phiên âm ASR). Sự thật bên dưới chưa được đối chiếu nguồn khác."
+    },
+    {
+      "id": "c3",
+      "type": "attributed",
+      "status": "pending",
+      "source_ids": [
+        "ref-video"
+      ],
+      "text": "Video tham chiếu nói rằng năm 1965 Singapore bị tách khỏi Malaysia và Thủ tướng Lý Quang Diệu khóc trên truyền hình (đoạn 10.12-19.02 s, phiên âm ASR). Sự thật bên dưới chưa được đối chiếu nguồn khác."
+    },
+    {
+      "id": "c4",
+      "type": "attributed",
+      "status": "pending",
+      "source_ids": [
+        "ref-video"
+      ],
+      "text": "Video tham chiếu nói rằng Singapore ít đất, không tài nguyên, dân nghèo, nhưng có lợi thế vị trí (đoạn 19.58-28.20 s, phiên âm ASR). Sự thật bên dưới chưa được đối chiếu nguồn khác."
+    },
+    {
+      "id": "c5",
+      "type": "attributed",
+      "status": "pending",
+      "source_ids": [
+        "ref-video"
+      ],
+      "text": "Video tham chiếu nói rằng đường ngắn nhất từ Trung Đông và châu Âu sang Trung Quốc, Nhật, Hàn đi qua eo biển Malacca, cửa ra nằm sát Singapore (đoạn 28.20-40.30 s, phiên âm ASR). Sự thật bên dưới chưa được đối chiếu nguồn khác."
+    },
+    {
+      "id": "c6",
+      "type": "attributed",
+      "status": "pending",
+      "source_ids": [
+        "ref-video"
+      ],
+      "text": "Video tham chiếu nói rằng khoảng một phần tư hàng hóa buôn bán của thế giới đi ngang qua đây (đoạn 41.04-46.14 s, phiên âm ASR). Sự thật bên dưới chưa được đối chiếu nguồn khác."
+    },
+    {
+      "id": "c7",
+      "type": "attributed",
+      "status": "pending",
+      "source_ids": [
+        "ref-video"
+      ],
+      "text": "Video tham chiếu nói rằng tàu chạy ngang không trả phí nên Singapore xây cảng lớn, bốc dỡ nhanh, phí hợp lý để tàu muốn ghé (đoạn 46.66-55.66 s, phiên âm ASR). Sự thật bên dưới chưa được đối chiếu nguồn khác."
+    },
+    {
+      "id": "c8",
+      "type": "attributed",
+      "status": "pending",
+      "source_ids": [
+        "ref-video"
+      ],
+      "text": "Video tham chiếu nói rằng tàu lớn thả container, tàu nhỏ chở đi khu vực, hàng Việt Nam từng đổi tàu ở đây, nay là một trong những cảng container bận rộn nhất thế giới (đoạn 55.66-66.68 s, phiên âm ASR). Sự thật bên dưới chưa được đối chiếu nguồn khác."
+    },
+    {
+      "id": "c9",
+      "type": "attributed",
+      "status": "pending",
+      "source_ids": [
+        "ref-video"
+      ],
+      "text": "Video tham chiếu nói rằng Singapore không có một giọt dầu nhưng là trung tâm lọc dầu lớn bậc nhất châu Á, mua dầu thô, lọc, bán lại cho khu vực (đoạn 67.24-82.16 s, phiên âm ASR). Sự thật bên dưới chưa được đối chiếu nguồn khác."
+    },
+    {
+      "id": "c10",
+      "type": "attributed",
+      "status": "pending",
+      "source_ids": [
+        "ref-video"
+      ],
+      "text": "Video tham chiếu nói rằng luật lệ rõ ràng, tham nhũng bị xử nặng, dùng tiếng Anh, thuế thấp (đoạn 82.16-89.76 s, phiên âm ASR). Sự thật bên dưới chưa được đối chiếu nguồn khác."
+    },
+    {
+      "id": "c11",
+      "type": "attributed",
+      "status": "pending",
+      "source_ids": [
+        "ref-video"
+      ],
+      "text": "Video tham chiếu nói rằng tập đoàn lớn đặt trụ sở châu Á tại Singapore, tiền ngân hàng và giới nhà giàu kéo về (đoạn 90.34-99.70 s, phiên âm ASR). Sự thật bên dưới chưa được đối chiếu nguồn khác."
+    },
+    {
+      "id": "c12",
+      "type": "attributed",
+      "status": "pending",
+      "source_ids": [
+        "ref-video"
+      ],
+      "text": "Video tham chiếu nói rằng Singapore giàu nhờ ba thứ: đứng đúng chỗ, biến vị trí thành dịch vụ ai đi ngang cũng dùng, làm cho tiền thấy an toàn để ở lại (đoạn 100.16-110.30 s, phiên âm ASR). Sự thật bên dưới chưa được đối chiếu nguồn khác."
+    }
+  ],
+  "assets": [],
+  "beats": [
+    {
+      "id": "01",
+      "narration": "Ê, hòn đảo bé xíu này còn nhỏ hơn Sài Gòn, không giàu, không mỏ, nước uống còn phải mua của hàng xóm. Vậy mà người dân ở đây giàu ngang người Mỹ, vì sao vậy nhỉ?",
+      "purpose": "Đặt câu hỏi trung tâm: vì sao nơi thiếu mọi thứ lại giàu.",
+      "scene_type": "stat_callout",
+      "claim_ids": [
+        "c1",
+        "c2"
+      ],
+      "asset_ids": [],
+      "audio_path": "audio/beat_01.wav",
+      "clip_path": "scenes/beat_01.mp4",
+      "tail_s": 0.35,
+      "layers": [
+        {
+          "id": "dot",
+          "role": "Điểm đánh dấu Singapore"
+        },
+        {
+          "id": "chips",
+          "role": "Ba thẻ thiếu thốn có dấu gạch"
+        },
+        {
+          "id": "question",
+          "role": "Thẻ câu hỏi giàu ngang người Mỹ, ghi theo video tham chiếu"
+        },
+        {
+          "id": "disclaimer",
+          "role": "Dòng mở đầu: bản dựng lại để so sánh, số liệu theo video tham chiếu, chưa kiểm chứng"
+        }
+      ],
+      "events": [
+        {
+          "target": "chips",
+          "trigger_phrase": "không giàu, không mỏ",
+          "action": "reveal three deficit chips",
+          "meaning": "Ba điều Singapore không có."
+        },
+        {
+          "target": "question",
+          "trigger_phrase": "vì sao vậy nhỉ",
+          "action": "pop question card",
+          "meaning": "Nghịch lý cần giải thích."
+        }
+      ],
+      "audio_duration_s": 9.6,
+      "slot_duration_s": 9.95,
+      "start_s": 0.0,
+      "audio_sha256": "abfa632ef52a805f03afdba070d05d2d01a16f4943e5b5b2dc58410d8ef955eb",
+      "narration_sha256": "71ad614d0d6c2f2d0969adec6cba7a3f5080d2b1b6f6105fab14255893660aa0"
+    },
+    {
+      "id": "02",
+      "narration": "Năm 1965, Singapore bị tách khỏi Malaysia. Thủ tướng Lý Quang Diệu khóc ngay trên truyền hình. Mà nói thật, nhìn hoàn cảnh lúc đó thì khóc cũng phải.",
+      "purpose": "Mốc thời gian 1965: xuất phát điểm khó khăn.",
+      "scene_type": "obligation_timeline",
+      "claim_ids": [
+        "c3"
+      ],
+      "asset_ids": [],
+      "audio_path": "audio/beat_02.wav",
+      "clip_path": "scenes/beat_02.mp4",
+      "tail_s": 0.35,
+      "layers": [
+        {
+          "id": "year",
+          "role": "Năm 1965 cỡ lớn"
+        },
+        {
+          "id": "split",
+          "role": "Hai khối Malaysia và Singapore tách nhau"
+        },
+        {
+          "id": "note",
+          "role": "Chú thích Lý Quang Diệu khóc trên truyền hình"
+        }
+      ],
+      "events": [
+        {
+          "target": "year",
+          "trigger_phrase": "Năm 1965",
+          "action": "count-in year",
+          "meaning": "Mốc thời gian."
+        },
+        {
+          "target": "split",
+          "trigger_phrase": "bị tách khỏi Malaysia",
+          "action": "slide two blocks apart",
+          "meaning": "Sự kiện chính trị: tách khỏi Malaysia."
+        },
+        {
+          "target": "note",
+          "trigger_phrase": "khóc ngay trên truyền hình",
+          "action": "reveal note card",
+          "meaning": "Lời kể của video tham chiếu."
+        }
+      ],
+      "audio_duration_s": 10.48,
+      "slot_duration_s": 10.83,
+      "start_s": 9.95,
+      "audio_sha256": "feb12bee0bad9752bbe58d3f15c8bd72d3a017feaf89ed45b7ff5fceb3055543",
+      "narration_sha256": "829b463df0025501e89b45dbb0c408e87862c9cae567618bfdb455248601680c"
+    },
+    {
+      "id": "03",
+      "narration": "Đất thì ít, tài nguyên thì không, dân thì nghèo, nói chung là toang. Nhưng có một thứ Singapore có mà không ai giành được, đó là vị trí.",
+      "purpose": "Trừ ba thiếu thốn, chỉ ra thứ duy nhất còn lại: vị trí.",
+      "scene_type": "asset_grid",
+      "claim_ids": [
+        "c4"
+      ],
+      "asset_ids": [],
+      "audio_path": "audio/beat_03.wav",
+      "clip_path": "scenes/beat_03.mp4",
+      "tail_s": 0.35,
+      "layers": [
+        {
+          "id": "cards",
+          "role": "Ba thẻ: đất ít, không tài nguyên, dân nghèo"
+        },
+        {
+          "id": "strike",
+          "role": "Gạch ngang ba thẻ"
+        },
+        {
+          "id": "position",
+          "role": "Thẻ vị trí nổi bật"
+        }
+      ],
+      "events": [
+        {
+          "target": "cards",
+          "trigger_phrase": "Đất thì ít",
+          "action": "deal three cards",
+          "meaning": "Ba thiếu thốn."
+        },
+        {
+          "target": "strike",
+          "trigger_phrase": "nói chung là toang",
+          "action": "strike through cards",
+          "meaning": "Những thứ này không phải lợi thế."
+        },
+        {
+          "target": "position",
+          "trigger_phrase": "đó là vị trí",
+          "action": "highlight position card",
+          "meaning": "Lợi thế duy nhất."
+        }
+      ],
+      "audio_duration_s": 8.08,
+      "slot_duration_s": 8.43,
+      "start_s": 20.78,
+      "audio_sha256": "ffe73f8719006d90ca53f5a5b83bcd0b88f59780961014c1cfaa183b2e86b9c1",
+      "narration_sha256": "eb3d7ee63d8714c8924a0feb963a080df76654da29d9e0705c40bfae843f12a7"
+    },
+    {
+      "id": "04",
+      "narration": "Các bạn nhìn nè, tàu chở dầu từ Trung Đông, tàu chở hàng từ châu Âu, muốn qua Trung Quốc, Nhật, Hàn thì đường ngắn nhất là đi qua eo biển Malacca. Và cửa ra của eo biển này nằm sát ngay Singapore.",
+      "purpose": "Sơ đồ minh họa tuyến tàu qua eo biển và vị trí Singapore ở cửa ra.",
+      "scene_type": "map_route",
+      "claim_ids": [
+        "c5"
+      ],
+      "asset_ids": [],
+      "audio_path": "audio/beat_04.wav",
+      "clip_path": "scenes/beat_04.mp4",
+      "tail_s": 0.35,
+      "layers": [
+        {
+          "id": "west",
+          "role": "Điểm xuất phát Trung Đông và châu Âu"
+        },
+        {
+          "id": "east",
+          "role": "Điểm đến Trung Quốc, Nhật, Hàn"
+        },
+        {
+          "id": "ships",
+          "role": "Tàu minh họa chạy qua eo biển"
+        },
+        {
+          "id": "strait",
+          "role": "Nút thắt eo biển Malacca"
+        },
+        {
+          "id": "sg",
+          "role": "Ghim Singapore ở cửa ra"
+        }
+      ],
+      "events": [
+        {
+          "target": "ships",
+          "trigger_phrase": "tàu chở dầu từ Trung Đông",
+          "action": "ships travel west to east",
+          "meaning": "Tuyến đường ngắn nhất."
+        },
+        {
+          "target": "strait",
+          "trigger_phrase": "eo biển Malacca",
+          "action": "narrow the channel and label it",
+          "meaning": "Nút thắt giao thông."
+        },
+        {
+          "target": "sg",
+          "trigger_phrase": "nằm sát ngay Singapore",
+          "action": "drop pin at the exit",
+          "meaning": "Cửa ra sát Singapore."
+        }
+      ],
+      "audio_duration_s": 11.6,
+      "slot_duration_s": 11.95,
+      "start_s": 29.21,
+      "audio_sha256": "03704701736b1cd8adbce667975fd13ed7bd73da04440c46c8410bc133627ce4",
+      "narration_sha256": "d184fec094a21626d1d8d3793f867d75d390cce313a13ceee975d497d557f74c"
+    },
+    {
+      "id": "05",
+      "narration": "Mỗi năm có rất nhiều chuyến tàu đi ngang, chở khoảng một phần tư hàng hóa buôn bán của cả thế giới.",
+      "purpose": "Nhấn quy mô: một phần tư thương mại thế giới, theo video tham chiếu.",
+      "scene_type": "stat_callout",
+      "claim_ids": [
+        "c6"
+      ],
+      "asset_ids": [],
+      "audio_path": "audio/beat_05.wav",
+      "clip_path": "scenes/beat_05.mp4",
+      "tail_s": 0.35,
+      "layers": [
+        {
+          "id": "stream",
+          "role": "Dòng tàu đi ngang"
+        },
+        {
+          "id": "quarter",
+          "role": "Một phần tư trên bốn ô"
+        }
+      ],
+      "events": [
+        {
+          "target": "stream",
+          "trigger_phrase": "rất nhiều chuyến tàu",
+          "action": "stream of ships",
+          "meaning": "Lưu lượng lớn."
+        },
+        {
+          "target": "quarter",
+          "trigger_phrase": "một phần tư hàng hóa",
+          "action": "fill one of four cells",
+          "meaning": "Tỷ lệ một phần tư."
+        }
+      ],
+      "audio_duration_s": 5.68,
+      "slot_duration_s": 6.03,
+      "start_s": 41.16,
+      "audio_sha256": "3f40d244d40be41da3def93a070aea5e5eea9950c7e9cffc04ab47c1c237d642",
+      "narration_sha256": "b1168204d2ea6c9619d0ee39fa16182f8bd315be913c5e99913749b087b5fd00"
+    },
+    {
+      "id": "06",
+      "narration": "Có điều tàu chạy ngang thì không trả đồng nào, nên Singapore phải làm sao cho tàu muốn ghé vào. Họ xây cảng thật lớn, bốc dỡ thật nhanh, phí hợp lý.",
+      "purpose": "Vấn đề: tàu đi ngang không mang lại tiền; giải pháp: cảng hấp dẫn.",
+      "scene_type": "transaction_flow",
+      "claim_ids": [
+        "c7"
+      ],
+      "asset_ids": [],
+      "audio_path": "audio/beat_06.wav",
+      "clip_path": "scenes/beat_06.mp4",
+      "tail_s": 0.35,
+      "layers": [
+        {
+          "id": "pass",
+          "role": "Tàu đi ngang, nhãn không trả phí"
+        },
+        {
+          "id": "port",
+          "role": "Cảng Singapore"
+        },
+        {
+          "id": "perks",
+          "role": "Ba nhãn: lớn, nhanh, phí hợp lý"
+        }
+      ],
+      "events": [
+        {
+          "target": "pass",
+          "trigger_phrase": "không trả đồng nào",
+          "action": "ship passes by, zero label",
+          "meaning": "Đi ngang không tạo doanh thu."
+        },
+        {
+          "target": "port",
+          "trigger_phrase": "xây cảng thật lớn",
+          "action": "port builds up",
+          "meaning": "Cảng là sản phẩm."
+        },
+        {
+          "target": "perks",
+          "trigger_phrase": "bốc dỡ thật nhanh",
+          "action": "reveal three perks",
+          "meaning": "Lý do tàu muốn ghé."
+        }
+      ],
+      "audio_duration_s": 9.36,
+      "slot_duration_s": 9.71,
+      "start_s": 47.19,
+      "audio_sha256": "c9a84e2d1b0c7f758df6f822b1f2c02f57d998bb10c6cc803dc87792f1982996",
+      "narration_sha256": "e7870df4cf6549ef1e7a74fac90d188766e7c2c4a9c8e35309808db40354148c"
+    },
+    {
+      "id": "07",
+      "narration": "Tàu lớn ghé vào thả container, tàu nhỏ chở đi khắp khu vực. Hàng Việt Nam mình hồi trước cũng ghé đây đổi tàu rất nhiều. Giờ nó là một trong những cảng container bận rộn nhất thế giới.",
+      "purpose": "Mô hình trung chuyển: tàu lớn thả container, tàu nhỏ phân phối.",
+      "scene_type": "transaction_flow",
+      "claim_ids": [
+        "c8"
+      ],
+      "asset_ids": [],
+      "audio_path": "audio/beat_07.wav",
+      "clip_path": "scenes/beat_07.mp4",
+      "tail_s": 0.35,
+      "layers": [
+        {
+          "id": "big",
+          "role": "Tàu lớn thả container"
+        },
+        {
+          "id": "small",
+          "role": "Tàu nhỏ chở đi khu vực"
+        },
+        {
+          "id": "vn",
+          "role": "Nhãn hàng Việt Nam"
+        },
+        {
+          "id": "badge",
+          "role": "Huy hiệu cảng bận rộn, ghi theo video tham chiếu"
+        }
+      ],
+      "events": [
+        {
+          "target": "big",
+          "trigger_phrase": "Tàu lớn ghé vào thả container",
+          "action": "big ship drops containers",
+          "meaning": "Chuyển container vào cảng."
+        },
+        {
+          "target": "small",
+          "trigger_phrase": "tàu nhỏ chở đi khắp khu vực",
+          "action": "small ships fan out",
+          "meaning": "Phân phối đi khu vực."
+        },
+        {
+          "target": "vn",
+          "trigger_phrase": "Hàng Việt Nam",
+          "action": "label one lane Việt Nam",
+          "meaning": "Ví dụ trong video tham chiếu."
+        },
+        {
+          "target": "badge",
+          "trigger_phrase": "bận rộn nhất thế giới",
+          "action": "pop badge",
+          "meaning": "Kết luận về quy mô cảng, theo video tham chiếu."
+        }
+      ],
+      "audio_duration_s": 10.72,
+      "slot_duration_s": 11.07,
+      "start_s": 56.9,
+      "audio_sha256": "d3382bbdc2d62db3635289436cabe3709d01c13072779a5f83c0d00033e83889",
+      "narration_sha256": "9bac8ba49a7c724d966f26b319cfa69440cabe7c89a7f172be7734131ec28a0d"
+    },
+    {
+      "id": "08",
+      "narration": "Đoạn này mới hay nè, Singapore không có nổi một giọt dầu, vậy mà lại là trung tâm lọc dầu lớn bậc nhất châu Á. Dầu thô chạy ngang thì mua vào, lọc thành xăng, dầu máy bay, rồi bán ngược lại cho cả khu vực. Không có hàng thì đi mua hàng của người khác về gia công lại.",
+      "purpose": "Cơ chế lọc dầu: mua dầu thô, lọc, bán lại.",
+      "scene_type": "transaction_flow",
+      "claim_ids": [
+        "c9"
+      ],
+      "asset_ids": [],
+      "audio_path": "audio/beat_08.wav",
+      "clip_path": "scenes/beat_08.mp4",
+      "tail_s": 0.35,
+      "layers": [
+        {
+          "id": "nowell",
+          "role": "Giọt dầu bằng không"
+        },
+        {
+          "id": "crude",
+          "role": "Dầu thô đi vào, nhãn mua"
+        },
+        {
+          "id": "refinery",
+          "role": "Nhà máy lọc dầu"
+        },
+        {
+          "id": "products",
+          "role": "Xăng và dầu máy bay đi ra, nhãn bán"
+        }
+      ],
+      "events": [
+        {
+          "target": "nowell",
+          "trigger_phrase": "không có nổi một giọt dầu",
+          "action": "show zero wells",
+          "meaning": "Không có nguồn dầu nội địa."
+        },
+        {
+          "target": "crude",
+          "trigger_phrase": "Dầu thô chạy ngang thì mua vào",
+          "action": "crude flows in with buy label",
+          "meaning": "Dòng tiền mua vào."
+        },
+        {
+          "target": "refinery",
+          "trigger_phrase": "lọc thành xăng, dầu máy bay",
+          "action": "refinery processes",
+          "meaning": "Gia công tạo giá trị."
+        },
+        {
+          "target": "products",
+          "trigger_phrase": "bán ngược lại cho cả khu vực",
+          "action": "products flow out with sell label",
+          "meaning": "Dòng tiền bán ra."
+        }
+      ],
+      "audio_duration_s": 16.31,
+      "slot_duration_s": 16.66,
+      "start_s": 67.97,
+      "audio_sha256": "add6e6faedc896d0a968de822f8aeedd676d819e23764fafe7870fbc6e62ec4f",
+      "narration_sha256": "4b242184026d3a119909827275139eeae87bb1a360b27d71d03151abe74c5584"
+    },
+    {
+      "id": "09",
+      "narration": "Bước cuối cùng là làm cho tiền muốn ở lại. Luật lệ rõ ràng, tham nhũng bị xử rất nặng. Ai cũng nói tiếng Anh, thuế lại thấp.",
+      "purpose": "Bốn điều kiện khiến tiền muốn ở lại.",
+      "scene_type": "asset_grid",
+      "claim_ids": [
+        "c10"
+      ],
+      "asset_ids": [],
+      "audio_path": "audio/beat_09.wav",
+      "clip_path": "scenes/beat_09.mp4",
+      "tail_s": 0.35,
+      "layers": [
+        {
+          "id": "title",
+          "role": "Tiêu đề bước cuối cùng"
+        },
+        {
+          "id": "cards",
+          "role": "Bốn thẻ: luật rõ, xử nặng tham nhũng, tiếng Anh, thuế thấp"
+        }
+      ],
+      "events": [
+        {
+          "target": "title",
+          "trigger_phrase": "tiền muốn ở lại",
+          "action": "reveal title",
+          "meaning": "Mục tiêu của bước cuối."
+        },
+        {
+          "target": "cards",
+          "trigger_phrase": "Luật lệ rõ ràng",
+          "action": "deal four cards",
+          "meaning": "Bốn điều kiện."
+        }
+      ],
+      "audio_duration_s": 7.6,
+      "slot_duration_s": 7.95,
+      "start_s": 84.63,
+      "audio_sha256": "f1c3f28829aa9e47c2f6b02bfa56cec582d63c54360935e6d941bec43972593f",
+      "narration_sha256": "825a92f07fe6e97fde3bd109d428058a05e9bfba5ba426a256dd7d0f5ff1f693"
+    },
+    {
+      "id": "10",
+      "narration": "Thế là các tập đoàn lớn đặt trụ sở châu Á ở đây, tiền của ngân hàng và giới nhà giàu cũng kéo về. Từ chỗ cho tàu ghé, Singapore thành chỗ cho tiền ghé.",
+      "purpose": "Tiền chảy về Singapore; chuyển từ chỗ cho tàu ghé sang chỗ cho tiền ghé.",
+      "scene_type": "cashflow",
+      "claim_ids": [
+        "c11"
+      ],
+      "asset_ids": [],
+      "audio_path": "audio/beat_10.wav",
+      "clip_path": "scenes/beat_10.mp4",
+      "tail_s": 0.35,
+      "layers": [
+        {
+          "id": "hq",
+          "role": "Thẻ tập đoàn đặt trụ sở"
+        },
+        {
+          "id": "money",
+          "role": "Token tiền minh họa từ ngân hàng và nhà giàu"
+        },
+        {
+          "id": "swap",
+          "role": "Biểu tượng tàu đổi thành đồng tiền"
+        }
+      ],
+      "events": [
+        {
+          "target": "hq",
+          "trigger_phrase": "đặt trụ sở châu Á",
+          "action": "card flies into hub",
+          "meaning": "Trụ sở đặt tại Singapore."
+        },
+        {
+          "target": "money",
+          "trigger_phrase": "tiền của ngân hàng",
+          "action": "tokens flow to hub",
+          "meaning": "Dòng tiền minh họa, không theo số liệu."
+        },
+        {
+          "target": "swap",
+          "trigger_phrase": "Từ chỗ cho tàu ghé",
+          "action": "ship icon turns into coin",
+          "meaning": "Chuyển vai trò: tàu ghé thành tiền ghé."
+        }
+      ],
+      "audio_duration_s": 9.2,
+      "slot_duration_s": 9.55,
+      "start_s": 92.58,
+      "audio_sha256": "849c3d01248b13ccbddf8f8b597f301d3f0946e5fbb79c78fafe74355edab4f7",
+      "narration_sha256": "41dc857bec9a7dc708f8c5fdf02a730fd08164c289ee4b7e37174a2c1bae4780"
+    },
+    {
+      "id": "11",
+      "narration": "Tóm lại, Singapore giàu nhờ ba thứ. Một là đứng đúng chỗ. Hai là biến cái chỗ đó thành dịch vụ mà ai đi ngang cũng phải dùng. Ba là làm cho tiền thấy an toàn để ở lại.",
+      "purpose": "Tổng kết ba lý do.",
+      "scene_type": "asset_grid",
+      "claim_ids": [
+        "c12"
+      ],
+      "asset_ids": [],
+      "audio_path": "audio/beat_11.wav",
+      "clip_path": "scenes/beat_11.mp4",
+      "tail_s": 0.35,
+      "layers": [
+        {
+          "id": "one",
+          "role": "Thẻ một: đứng đúng chỗ"
+        },
+        {
+          "id": "two",
+          "role": "Thẻ hai: biến vị trí thành dịch vụ"
+        },
+        {
+          "id": "three",
+          "role": "Thẻ ba: tiền thấy an toàn"
+        }
+      ],
+      "events": [
+        {
+          "target": "one",
+          "trigger_phrase": "Một là",
+          "action": "reveal card one",
+          "meaning": "Lý do một."
+        },
+        {
+          "target": "two",
+          "trigger_phrase": "Hai là",
+          "action": "reveal card two",
+          "meaning": "Lý do hai."
+        },
+        {
+          "target": "three",
+          "trigger_phrase": "Ba là",
+          "action": "reveal card three",
+          "meaning": "Lý do ba."
+        }
+      ],
+      "audio_duration_s": 10.48,
+      "slot_duration_s": 10.83,
+      "start_s": 102.13,
+      "audio_sha256": "eac252c843002d6ee6ebcaade077ec1157952e37df5bf2258cebdb8014481115",
+      "narration_sha256": "92fa7aff498de6faf7909fbb3734fa436399f6fbcc0c85e82c4b9238f8cd40dc"
+    },
+    {
+      "id": "12",
+      "narration": "Có chỗ nào làm được như vậy không?",
+      "purpose": "Câu hỏi mở: mở rộng sang các nơi khác (không có lời kêu gọi của kênh gốc).",
+      "scene_type": "stat_callout",
+      "claim_ids": [],
+      "asset_ids": [],
+      "audio_path": "audio/beat_12.wav",
+      "clip_path": "scenes/beat_12.mp4",
+      "tail_s": 0.35,
+      "layers": [
+        {
+          "id": "ask",
+          "role": "Câu hỏi mở"
+        }
+      ],
+      "events": [
+        {
+          "target": "ask",
+          "trigger_phrase": "Có chỗ nào",
+          "action": "pop question",
+          "meaning": "Mở rộng sang các nơi khác."
+        }
+      ],
+      "audio_duration_s": 1.92,
+      "slot_duration_s": 2.27,
+      "start_s": 112.96,
+      "audio_sha256": "aa891fe7d313a8710acdce05ea3875cc50e4ad899cf33b4e9726c71fe4743bcf",
+      "narration_sha256": "487112648117184b42ce9d5e5659a7817356b1af3e1e281e63376ca9731d851a"
+    }
+  ],
+  "total_duration_s": 115.23
+}

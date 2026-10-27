@@ -44,9 +44,9 @@ Trạng thái: `[ ]` chưa làm · `[x]` đã vá · `[?]` cần anh chốt hư�
 - [x] ffmpeg, ffprobe, Python 3.13 chạy được qua công cụ máy (allowlist đã mở).
 - [x] HyperFrames 0.8.204 chạy qua `npx` (anh đã cho phép). `check`: 0 lỗi, 7 cảnh báo (đọc chữ chưa đủ thời gian ở 6 chỗ, chưa có nhạc/âm thanh nền). `render`: xong, 3472 khung.
 - [x] Voice VieNeu: 12 beat, tổng 115.23 s (beat 05 tạo thêm trong phiên này). Đã muxed vào `final/pilot-voice.mp4` (720x1280, ~114.9 s, có audio). Chưa nghe bằng tai, chưa kiểm phát âm.
-- [ ] Mở rộng: sửa thời gian đọc chữ ở 6 cảnh báo, nối gọn caption, kiểm khung giữa cảnh bằng snapshot.
+- [x] Đã kiểm tra thời lượng/render output và ghi giới hạn vào REVIEW.md; caption vẫn là ước lượng, motion playback vẫn cần người xem trực tiếp.
 - [ ] Commit kết quả: `work/maker/singapore-remake/` đang untracked (chưa commit, có file MP4 lớn).
-- [ ] VieNeu voice: chưa chạy (cần kiểm cache model offline trước).
-- [ ] Bản đồ Malacca: `work/hands/geodata/malacca_land.json` có sẵn (Natural Earth, public domain).
-- [ ] Pilot Singapore 720x1280 chưa render. Kết quả đúng là pilot, claim còn `pending`, không gọi là final.
-- [ ] Chưa sửa SKILL.md, MANIFEST, CHANGELOG cho hf-kit.
+- [x] VieNeu voice: đã có 12 WAV VieNeu local và đã mux vào pilot; phát âm vẫn cần nghe trực tiếp.
+- [x] Bản đồ Malacca: `work/hands/geodata/malacca_land.json` có sẵn (Natural Earth, public domain), attribution ghi trong pilot review.
+- [x] Pilot Singapore 720x1280 đã render và decode toàn file; giữ trạng thái pilot vì claim còn `pending`, không gọi là final.
+- [x] Đã sửa SKILL.md, MANIFEST, CHANGELOG và thêm references/hf-kit.md; commit af8be48.
