@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- Reproducible Singapore pilot artifacts with measured VieNeu audio, HyperFrames render, geometry input, and explicit human-review limits.
 - HyperFrames kit contract covering scene data, capability-gated media inputs, deterministic timelines, and a concrete beauty bar for editorial explainer pilots.
 
 ### Changed
