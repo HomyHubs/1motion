@@ -27,5 +27,5 @@ jobs:
 
       - name: Validate project schema and pilot
         run: |
-          python3 make-editorial-explainer/scripts/validate_schema.py make-editorial-explainer/examples/pilot.project.json
+          python3 make-editorial-explainer/scripts/check_schema.py make-editorial-explainer/examples/pilot.project.json
           python3 make-editorial-explainer/scripts/project_tools.py --schema make-editorial-explainer/examples/pilot.project.json
